@@ -8,7 +8,7 @@ import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame ventana = new JFrame("Juegos de Póker");
+        JFrame ventana = new JFrame("Casino Guasavito");
         ventana.setSize(500,500);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLocationRelativeTo(null);
@@ -108,14 +108,14 @@ public class Main {
                         
                         break;
                     case 1:
-                        while (numJugadores<2 || numJugadores>10) {
+                        while (numJugadores<2 || numJugadores>7) {
                             String numJugadoresStr = JOptionPane.showInputDialog(ventana,
                                     "Número de jugadores", "Jugadores",
                                     JOptionPane.QUESTION_MESSAGE);
                             numJugadores = Integer.parseInt(numJugadoresStr);
-                            if (numJugadores<2 || numJugadores>4) {
+                            if (numJugadores<2 || numJugadores>7) {
                                 JOptionPane.showMessageDialog(null,
-                                        "Solo pueden jugar 2 - 10 jugadores",
+                                        "Solo pueden jugar 2 - 7 jugadores",
                                         "Error",JOptionPane.ERROR_MESSAGE);
                             }
                         }
@@ -128,6 +128,7 @@ public class Main {
                         }
                         System.out.println(Arrays.toString(jugadoresJuego2));
                         tipoPokerStr = "Otro juego";
+                        CardDraw5 cardDraw5 = new CardDraw5(numJugadores);
                         break;
                 }
             }
