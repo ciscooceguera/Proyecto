@@ -103,9 +103,9 @@ public class Main {
                         }
                         System.out.println(Arrays.toString(jugadoresJuego1));
                         tipoPokerStr = "Texas Hold 'em'";
-                        TexasHoldEm juego = new TexasHoldEm();
-                        juego.crearInterfaz();
-//                        juego.iniciarJuego();
+
+                        JuegoDePoker juego = new TexasHoldEm(numJugadores);
+                        
                         break;
                     case 1:
                         while (numJugadores<2 || numJugadores>10) {
