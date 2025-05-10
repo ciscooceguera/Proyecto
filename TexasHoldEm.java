@@ -21,6 +21,7 @@ public class TexasHoldEm extends JuegoDePoker {
             Scanner sc = new Scanner(System.in);
             opc = sc.nextInt();
         }*/
+
         ArrayList<Carta> manoSinEscalera = new ArrayList<>();
         for (int i = 0; i < 5; i++){
             manoSinEscalera.add(new Carta("Corazón",i+1));

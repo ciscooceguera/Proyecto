@@ -10,7 +10,7 @@ public class Mazo {
     4 tipos de figura presentes en las cartas, y el otro vector, que contiene
     todos los valores que pueden contener las cartas. */
     public void crearMazo(){
-        String[] figurasCartas = {"Corazón","Trébol","Pica","Diamante"};
+        String[] figurasCartas = {"Corazon","Trebol","Pica","Diamante"};
         int[] valoresCartas = {1,2,3,4,5,6,7,8,9,10,11,12,13};
         for (String figura : figurasCartas) {
             for (int valor : valoresCartas) {
