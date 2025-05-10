@@ -94,7 +94,8 @@ public class Main {
                         }
                         tipoPokerStr = "Texas Hold 'em'";
                         TexasHoldEm juego = new TexasHoldEm();
-                        juego.iniciarJuego();
+                        juego.crearInterfaz();
+//                        juego.iniciarJuego();
                         break;
                     case 1:
                         while (numJugadores<2 || numJugadores>10) {

@@ -63,42 +63,42 @@ public class Mano {
         return contadorRepeticionesFigura == mano.size();
     }
     // retorna booleano, evalúa si todas las cartas que componen la mano son del mismo color
-    public boolean esMismoColor(){
-        int contadorRepeticionesColor = 0;
-        String colorActual = "";
-        for (Carta carta : mano){
-            if (contadorRepeticionesColor != 0){
-                if (carta.getColor().equals(colorActual)){
-                    contadorRepeticionesColor++;
-                }else{
-                    break;
-                }
-            }else{
-                colorActual = carta.getColor();
-                contadorRepeticionesColor++;
-            }
-        }
-        return contadorRepeticionesColor == mano.size();
-    }
+//    public boolean esMismoColor(){
+//        int contadorRepeticionesColor = 0;
+//        String colorActual = "";
+//        for (Carta carta : mano){
+//            if (contadorRepeticionesColor != 0){
+//                if (carta.getColor().equals(colorActual)){
+//                    contadorRepeticionesColor++;
+//                }else{
+//                    break;
+//                }
+//            }else{
+//                colorActual = carta.getColor();
+//                contadorRepeticionesColor++;
+//            }
+//        }
+//        return contadorRepeticionesColor == mano.size();
+//    }
     // Retorna booleano, evalúa si la mano contiene una escalera real
     public boolean esEscaleraReal(){
         return esMismaFigura();
     }
     // Retorna booleano, evalúa si la mano contiene una escalera de color
-    public boolean esEscaleraDeColor(){
-        return esMismoColor();
-    }
+//    public boolean esEscaleraDeColor(){
+//        return esMismoColor();
+//    }
     // Retorna booleano, evalúa si la mano contiene una escalera straight
-    public boolean esEscaleraStraight(){
-        return !esEscaleraReal() && !esEscaleraDeColor();
-    }
-    // Retorna una cadena que representa la impresión de la mano en consola
-    public String toString(){
-        String manoString = "";
-        for (Carta carta : mano) {
-            manoString += carta.toString()+"\n";
-        }
-        return manoString;
-    }
+//    public boolean esEscaleraStraight(){
+//        return !esEscaleraReal() && !esEscaleraDeColor();
+//    }
+//    // Retorna una cadena que representa la impresión de la mano en consola
+//    public String toString(){
+//        String manoString = "";
+//        for (Carta carta : mano) {
+//            manoString += carta.toString()+"\n";
+//        }
+//        return manoString;
+//    }
 
 }
