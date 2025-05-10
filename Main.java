@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 
 public class Main {
     public static void main(String[] args) {
@@ -13,7 +14,7 @@ public class Main {
         ventana.setLocationRelativeTo(null);
         ventana.setLayout(null);
         ventana.setVisible(true);
-        ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\imageMain.png");
+        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\imageMain.png");
         JLabel image = new JLabel(pic);
         image.setBounds(0,0,500,500);
         ventana.add(image);
@@ -74,16 +75,6 @@ public class Main {
         jugar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 int numJugadores = 0;
-                while (numJugadores<2 || numJugadores>4) {
-                    String numJugadoresStr = JOptionPane.showInputDialog(ventana,
-                            "Número de jugadores", "Jugadores",
-                            JOptionPane.QUESTION_MESSAGE);
-                    numJugadores = Integer.parseInt(numJugadoresStr);
-                    if (numJugadores<2 || numJugadores>4) {
-                        JOptionPane.showMessageDialog(null,
-                                "Solo pueden jugar 2 - 4 jugadores");
-                    }
-                }
                 Object[] botones = {"Texas Hold 'em","Otro juego"};
                 int tipoPoker = JOptionPane.showOptionDialog(ventana,
                         "Elige modalidad","Modalidad",
@@ -92,11 +83,50 @@ public class Main {
                 String tipoPokerStr = "";
                 switch (tipoPoker){
                     case 0:
+                        while (numJugadores<2 || numJugadores>10) {
+                            String numJugadoresStr = JOptionPane.showInputDialog(ventana,
+                                    "Número de jugadores", "Jugadores",
+                                    JOptionPane.QUESTION_MESSAGE);
+                            numJugadores = Integer.parseInt(numJugadoresStr);
+                            if (numJugadores<2 || numJugadores>10) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Solo pueden jugar 2 - 10 jugadores",
+                                        "Error",JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        String [] jugadoresJuego1 = new String[numJugadores];
+                        for(int i = 0; i < numJugadores; i++){
+                            String nombreJugador = JOptionPane.showInputDialog(ventana,
+                                    "Ingresa el nombre del jugador "+(i+1),
+                                    "Nombre del jugador", JOptionPane.QUESTION_MESSAGE);
+                            jugadoresJuego1[i] = nombreJugador;
+                        }
+                        System.out.println(Arrays.toString(jugadoresJuego1));
                         tipoPokerStr = "Texas Hold 'em'";
+
                         JuegoDePoker juego = new TexasHoldEm(numJugadores);
-                        ;
+                        
                         break;
                     case 1:
+                        while (numJugadores<2 || numJugadores>10) {
+                            String numJugadoresStr = JOptionPane.showInputDialog(ventana,
+                                    "Número de jugadores", "Jugadores",
+                                    JOptionPane.QUESTION_MESSAGE);
+                            numJugadores = Integer.parseInt(numJugadoresStr);
+                            if (numJugadores<2 || numJugadores>4) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Solo pueden jugar 2 - 10 jugadores",
+                                        "Error",JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        String [] jugadoresJuego2 = new String[numJugadores];
+                        for(int i = 0; i < numJugadores; i++){
+                            String nombreJugador = JOptionPane.showInputDialog(ventana,
+                                    "Ingresa el nombre del jugador "+(i+1),
+                                    "Nombre del jugador", JOptionPane.QUESTION_MESSAGE);
+                            jugadoresJuego2[i] = nombreJugador;
+                        }
+                        System.out.println(Arrays.toString(jugadoresJuego2));
                         tipoPokerStr = "Otro juego";
                         break;
                 }
@@ -116,6 +146,5 @@ public class Main {
                 System.exit(0);
             }
         });
-
     }
 }

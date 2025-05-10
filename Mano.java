@@ -158,5 +158,4 @@ public class Mano {
     public int getCartaMasAlta(){
         return Collections.max(mano).getValor();
     }
-
 }

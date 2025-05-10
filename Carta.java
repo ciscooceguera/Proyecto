@@ -16,21 +16,47 @@ public class Carta implements Comparable {
     // Setter para definir el color de la carta
     public void setColor(){
         switch(figura){
-            case "Corazón", "Diamante":
+            case "Corazon", "Diamante":
                 color = "Rojo";
                 break;
-            case "Pica", "Trébol":
+            case "Pica", "Trebol":
                 color = "Negro";
                 break;
         }
     }
-    // Método que retorna la imagen que representa a la carta
+    // Metodo que retorna la imagen que representa a la carta
     public Icon obtenerIcono(){
-        String path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\"+figura+valor+".jpg";
+        String path;
+        switch(valor){
+            case 1:
+                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\A"+figura+".jpg";
+                break;
+            case 11:
+                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\J"+figura+".jpg";
+                break;
+            case 12:
+                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\Q"+figura+".jpg";
+                break;
+            case 13:
+                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\K"+figura+".jpg";
+                break;
+            default:
+                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\"+valor+figura+".jpg";
+        }
         return new ImageIcon(path);
     }
     // retorna una cadena String que representa la impresión en consola de una carta
     public String toString(){
+        switch(valor){
+            case 1:
+                return figura+": A";
+            case 11:
+                return figura+": J";
+            case 12:
+                return figura+": Q";
+            case 13:
+                return figura+": K";
+        }
         return figura + ": " + valor;
     }
     // retorne el valor
