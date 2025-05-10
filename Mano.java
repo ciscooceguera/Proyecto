@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 
 public class Mano {
@@ -41,6 +42,60 @@ public class Mano {
         }
         return contadorCartasConsecutivas == mano.size();
     }
+    // retorna true si hay un par
+    public boolean hayPar(){
+        acomodarMano();
+        int contadorCartasConsecutivas = 1;
+        for (Carta carta : mano) {
+            if (cuantasRepetidas(carta) == 2){
+                return true;
+            }
+        }
+        return false;
+    }
+    // retorna true si hay dos pares
+    public boolean hayDosPares(){
+        HashSet<Integer> pares = new HashSet<>();
+        acomodarMano();
+        for (int i = 0; i<mano.size(); i++){
+            Carta carta = mano.get(i);
+            if (cuantasRepetidas(carta) == 2){
+                pares.add(carta.getValor());
+            }
+        }
+        return pares.size() == 2;
+    }
+    // retorna true si hay una tercia
+    public boolean hayTercia(){
+        for (Carta carta : mano){
+            int numRepetidas = cuantasRepetidas(carta);
+            if (numRepetidas == 3){
+                return true;
+            }
+        }
+        return false;
+    }
+    public int cuantasRepetidas(Carta carta){
+        int contadorCartasRepetidas = 1;
+        for (Carta cartas : mano) {
+            if (cartas.getValor() == carta.getValor()){
+                contadorCartasRepetidas++;
+            }
+        }
+        return contadorCartasRepetidas-1;
+    }
+    // retorna booleano si la mano contiene un póquer; 4 cartas del mismo valor
+    public boolean esPoker(){
+        acomodarMano();
+        for (Carta carta : mano){
+            int numRepetidas = cuantasRepetidas(carta);
+            if (numRepetidas == 4){
+                return true;
+            }
+        }
+        return false;
+    }
+    // acomoda la mano usando sort() de Collections
     public void acomodarMano(){
         Collections.sort(mano);
     }
@@ -99,6 +154,9 @@ public class Mano {
             manoString += carta.toString()+"\n";
         }
         return manoString;
+    }
+    public int getCartaMasAlta(){
+        return Collections.max(mano).getValor();
     }
 
 }

@@ -93,8 +93,8 @@ public class Main {
                 switch (tipoPoker){
                     case 0:
                         tipoPokerStr = "Texas Hold 'em'";
-                        TexasHoldEm juego = new TexasHoldEm();
-                        juego.iniciarJuego();
+                        JuegoDePoker juego = new TexasHoldEm(numJugadores);
+                        ;
                         break;
                     case 1:
                         tipoPokerStr = "Otro juego";
