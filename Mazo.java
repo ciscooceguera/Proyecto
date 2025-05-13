@@ -5,13 +5,15 @@ public class Mazo {
     // Constructor del mazo inicializa el atributo
     public Mazo(){
         mazo = new ArrayList<Carta>();
+        crearMazo();
+        revolverMazo();
     }
     /* Método para crear el mazo iterando 2 vectores, uno que contiene los
     4 tipos de figura presentes en las cartas, y el otro vector, que contiene
     todos los valores que pueden contener las cartas. */
     public void crearMazo(){
         String[] figurasCartas = {"Corazon","Trebol","Pica","Diamante"};
-        int[] valoresCartas = {1,2,3,4,5,6,7,8,9,10,11,12,13};
+        int[] valoresCartas = {2,3,4,5,6,7,8,9,10,11,12,13,14};
         for (String figura : figurasCartas) {
             for (int valor : valoresCartas) {
                 mazo.add(new Carta(figura,valor));
