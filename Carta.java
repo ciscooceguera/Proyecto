@@ -28,34 +28,34 @@ public class Carta implements Comparable {
     public Icon obtenerIcono(){
         String path;
         switch(valor){
-            case 14:
-                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\A"+figura+".jpg";
-                break;
             case 11:
-                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\J"+figura+".jpg";
+                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\J"+figura+".png";
                 break;
             case 12:
-                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\Q"+figura+".jpg";
+                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\Q"+figura+".png";
                 break;
             case 13:
-                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\K"+figura+".jpg";
+                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\K"+figura+".png";
+                break;
+            case 14:
+                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\A"+figura+".png";
                 break;
             default:
-                path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\"+valor+figura+".jpg";
+                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\"+valor+figura+".png";
         }
         return new ImageIcon(path);
     }
     // retorna una cadena String que representa la impresión en consola de una carta
     public String toString(){
         switch(valor){
-            case 14:
-                return figura+": A";
             case 11:
                 return figura+": J";
             case 12:
                 return figura+": Q";
             case 13:
                 return figura+": K";
+            case 14:
+                return figura+": A";
         }
         return figura + ": " + valor;
     }
