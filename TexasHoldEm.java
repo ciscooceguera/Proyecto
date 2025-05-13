@@ -6,6 +6,7 @@ public class TexasHoldEm extends JuegoDePoker {
     private ArrayList<Carta> cartasComunitarias;
     public TexasHoldEm(int numJugadores){
         super(numJugadores);
+        crearInterfaz();
     }
 
     public void crearInterfaz(){

@@ -28,7 +28,7 @@ public class Carta implements Comparable {
     public Icon obtenerIcono(){
         String path;
         switch(valor){
-            case 1:
+            case 14:
                 path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\A"+figura+".jpg";
                 break;
             case 11:
@@ -48,7 +48,7 @@ public class Carta implements Comparable {
     // retorna una cadena String que representa la impresión en consola de una carta
     public String toString(){
         switch(valor){
-            case 1:
+            case 14:
                 return figura+": A";
             case 11:
                 return figura+": J";

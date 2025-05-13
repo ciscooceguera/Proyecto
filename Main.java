@@ -14,7 +14,7 @@ public class Main {
         ventana.setLocationRelativeTo(null);
         ventana.setLayout(null);
         ventana.setVisible(true);
-        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\imageMain.png");
+        ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\imageMain.png");
         JLabel image = new JLabel(pic);
         image.setBounds(0,0,500,500);
         ventana.add(image);
@@ -128,6 +128,10 @@ public class Main {
                         }
                         System.out.println(Arrays.toString(jugadoresJuego2));
                         tipoPokerStr = "Otro juego";
+                        Mazo mazo = new Mazo();
+                        mazo.crearMazo();
+                        mazo.revolverMazo();
+                        System.out.println(mazo);
                         break;
                 }
             }
