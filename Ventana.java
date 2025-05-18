@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.border.TitledBorder;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Ventana extends JFrame {
@@ -17,6 +19,7 @@ public class Ventana extends JFrame {
     protected JPanel cartasRonda = new JPanel();
     protected JTextArea bote = new JTextArea();
     protected JTextArea informacionJugadores = new JTextArea();
+    protected JLabel ventana = new JLabel(new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\fondoPoker.png"));
 
     public Ventana(String tipoPoker){
         if(tipoPoker.equals("Texas HoldEm")){
@@ -199,5 +202,15 @@ public class Ventana extends JFrame {
         for(Carta c : cartas){
             cartasRonda.add(new JLabel(c.obtenerIcono()));
         }
+    }
+
+    public int apostar(){
+        int dineroApostado = 0;
+        bet.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        return dineroApostado;
     }
 }
