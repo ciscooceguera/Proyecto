@@ -14,7 +14,7 @@ public class TexasHoldEm extends JuegoDePoker {
     }
   
     public void iniciarJuego(){
-        ventana = new Ventana("Texas Hold Em");
+        ventana = new Ventana("Texas HoldEm");
     }
     // implementa repartirManos() que es abstracto, llena el arraylist de manos de acuerdo al # de jugadores
     @Override
@@ -70,12 +70,44 @@ public class TexasHoldEm extends JuegoDePoker {
     }
 
     public void pagarCiegaPequeña(){
-        dinero[0]-=ciegaPequeña;
+        dinero[jugadorEnTurno]-=ciegaPequeña;
         bote+=ciegaPequeña;
     }
 
     public void pagarCiegaGrande(){
-        dinero[0]-=ciegaGrande;
+        dinero[jugadorEnTurno]-=ciegaGrande;
         bote+=ciegaGrande;
+    }
+    public void apostar(int dineroApostado){
+        dinero[jugadorEnTurno]-=dineroApostado;
+        bote+=dineroApostado;
+        apuestaMasGrande=dineroApostado;
+        ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\apuestaImagen.png");
+        Image imagenAEscalar = imagen.getImage();
+        JOptionPane.showMessageDialog(null,
+                "Jugador "+jugadorEnTurno+" ha apostado +"+apuestaMasGrande+"!",
+                "Anuncio de Apuesta",JOptionPane.INFORMATION_MESSAGE,
+                imagen);
+    }
+    public void callear(){
+        dinero[jugadorEnTurno]-=apuestaMasGrande;
+        bote+=apuestaMasGrande;
+        ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\callImagen.png");
+        Image imagenAEscalar = imagen.getImage();
+        imagen = new ImageIcon(imagenAEscalar.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        JOptionPane.showMessageDialog(null,
+                "Jugador "+jugadorEnTurno+" ha apostado +"+apuestaMasGrande+"!",
+                "Anuncio de Call",JOptionPane.INFORMATION_MESSAGE,
+                imagen);
+    }
+    public void foldear(){
+        manos.remove(jugadorEnTurno);
+        ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\quitImagen.png");
+        Image imagenAEscalar = imagen.getImage();
+        imagen = new ImageIcon(imagenAEscalar.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+        JOptionPane.showMessageDialog(null,
+                "Jugador "+jugadorEnTurno+" ha foldeado!",
+                "Anuncio de Fold",JOptionPane.INFORMATION_MESSAGE,
+                imagen);
     }
 }
