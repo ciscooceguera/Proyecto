@@ -10,11 +10,13 @@ public class Main {
     public static void main(String[] args) {
         JFrame ventana = new JFrame("Casino Guasavito");
         ventana.setSize(500,500);
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLocationRelativeTo(null);
+        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.setVisible(false);
         ventana.setLayout(null);
         ventana.setVisible(true);
-        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\imageMain.png");
+        //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\imageMain.png");
+        ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\imageMain.png");
         JLabel image = new JLabel(pic);
         image.setBounds(0,0,500,500);
         ventana.add(image);
@@ -90,11 +92,16 @@ public class Main {
                             String numJugadoresStr = JOptionPane.showInputDialog(ventana,
                                     "Número de jugadores", "Jugadores",
                                     JOptionPane.QUESTION_MESSAGE);
-                            numJugadores = Integer.parseInt(numJugadoresStr);
-                            if (numJugadores<2 || numJugadores>10) {
-                                JOptionPane.showMessageDialog(null,
-                                        "Solo pueden jugar 2 - 10 jugadores",
-                                        "Error",JOptionPane.ERROR_MESSAGE);
+                            try{
+                                numJugadores = Integer.parseInt(numJugadoresStr);
+                                if (numJugadores<2 || numJugadores>10) {
+                                    JOptionPane.showMessageDialog(null,
+                                            "Solo pueden jugar 2 - 10 jugadores",
+                                            "Error",JOptionPane.ERROR_MESSAGE);
+                                }
+                            }catch (NumberFormatException exception){
+                                JOptionPane.showMessageDialog(null,"Ingrese un número de jugadores"
+                                        );
                             }
                         }
                         String [] jugadoresJuego1 = new String[numJugadores];
@@ -105,10 +112,7 @@ public class Main {
                             jugadoresJuego1[i] = nombreJugador;
                         }
                         System.out.println(Arrays.toString(jugadoresJuego1));
-                        tipoPokerStr = "Texas Hold 'em'";
-
                         JuegoDePoker juego = new TexasHoldEm(numJugadores);
-                        
                         break;
                     case 1:
                         while (numJugadores<2 || numJugadores>7) {
@@ -131,7 +135,7 @@ public class Main {
                         }
                         System.out.println(Arrays.toString(jugadoresJuego2));
                         tipoPokerStr = "Otro juego";
-                        CardDraw5 cardDraw5 = new CardDraw5(numJugadores);
+                        JuegoDePoker cardDraw5 = new CardDraw5(numJugadores);
                         break;
                 }
             }

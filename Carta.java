@@ -26,24 +26,45 @@ public class Carta implements Comparable {
     }
     // Metodo que retorna la imagen que representa a la carta
     public Icon obtenerIcono(){
-        String path;
+        String path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\";
         switch(valor){
             case 11:
-                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\J"+figura+".png";
+                path += "J"+figura+".png";
                 break;
             case 12:
-                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\Q"+figura+".png";
+                path += "Q"+figura+".png";
                 break;
             case 13:
-                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\K"+figura+".png";
+                path += "K"+figura+".png";
                 break;
             case 14:
-                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\A"+figura+".png";
+                path = "A"+figura+".png";
                 break;
             default:
-                path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\"+valor+figura+".png";
+                path = valor+figura+".png";
         }
         return new ImageIcon(path);
+    }
+    // Metodo que retorna la ruta que representa a la carta
+    public String obtenerImgRuta(){
+        String path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\";
+        switch(valor){
+            case 11:
+                path += "J"+figura+".png";
+                break;
+            case 12:
+                path += "Q"+figura+".png";
+                break;
+            case 13:
+                path += "K"+figura+".png";
+                break;
+            case 14:
+                path += "A"+figura+".png";
+                break;
+            default:
+                path += valor+figura+".png";
+        }
+        return path;
     }
     // retorna una cadena String que representa la impresión en consola de una carta
     public String toString(){

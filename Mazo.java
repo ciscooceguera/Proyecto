@@ -8,7 +8,7 @@ public class Mazo {
         crearMazo();
         revolverMazo();
     }
-    /* Método para crear el mazo iterando 2 vectores, uno que contiene los
+    /* Crea el mazo iterando 2 vectores, uno que contiene los
     4 tipos de figura presentes en las cartas, y el otro vector, que contiene
     todos los valores que pueden contener las cartas. */
     public void crearMazo(){
@@ -22,14 +22,7 @@ public class Mazo {
     }
     // Revuelve el mazo usando la clase Random
     public void revolverMazo(){
-        Random rndNum = new Random();
-        for (int i = 0; i < mazo.size(); i++) {
-            Carta carta1 = mazo.get(i);
-            int posicionRnd = rndNum.nextInt(mazo.size());
-            Carta carta2 = mazo.get(posicionRnd);
-            mazo.set(i,carta2);
-            mazo.set(posicionRnd,carta1);
-        }
+        Collections.shuffle(mazo);
     }
     /* toma N cartas, recibe de parámetro el número de cartas que se desean,
     retorna un ArrayList de tipo Carta. */
