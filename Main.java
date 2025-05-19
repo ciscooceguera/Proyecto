@@ -6,7 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Arrays;
 
-public class Main {
+public class Main extends JFrame {
     public static void main(String[] args) {
         JFrame ventana = new JFrame("Casino Guasavito");
         ventana.setSize(500,500);
@@ -16,7 +16,7 @@ public class Main {
         ventana.setLayout(null);
         ventana.setVisible(true);
         //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\imageMain.png");
-        ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\imageMain.png");
+        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\imageMain.png");
         JLabel image = new JLabel(pic);
         image.setBounds(0,0,500,500);
         ventana.add(image);

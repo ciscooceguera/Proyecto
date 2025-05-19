@@ -259,15 +259,7 @@ public class Ventana extends JFrame {
         mensajeTurno.setEnabled(false);
         this.add(mensajeTurno);
     }
-    public int apostar(){
-        int dineroApostado = 0;
-        bet.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
-        return dineroApostado;
-    }
     // muestra el dinero del jugador
     public void mostrarDineroJugador(int dinero){
         textDineroJugador.setText("$"+dinero);

@@ -5,13 +5,13 @@ import java.util.ArrayList;
 import java.awt.*;
 import java.util.HashMap;
 
-public abstract class JuegoDePoker {
+public abstract class JuegoDePoker extends JFrame {
     protected Mazo mazo;
     protected ArrayList<Mano> manos;
     protected int numJugadores, ciegaPequeña, ciegaGrande, bote, jugadorEnTurno, apuestaMasGrande;
     protected int[] dinero;
     protected HashMap<String,Integer> jugadores;
-    protected int numJugadores;
+
     public JuegoDePoker(int numJugadores) {
         this.numJugadores = numJugadores;
         mazo = new Mazo();
