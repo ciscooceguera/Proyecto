@@ -1,13 +1,20 @@
+import javax.swing.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.awt.*;
+import java.util.HashMap;
 
 public abstract class JuegoDePoker {
     protected Mazo mazo;
     protected ArrayList<Mano> manos;
+    protected HashMap<String,Integer> jugadores;
     protected int numJugadores;
     public JuegoDePoker(int numJugadores) {
         this.numJugadores = numJugadores;
         mazo = new Mazo();
         manos = new ArrayList<>();
+        jugadores = new HashMap<>();
         inicializarComponentes();
     }
     // inicializa el mazo y llama repartir manos
@@ -22,4 +29,5 @@ public abstract class JuegoDePoker {
     }
     // reparte las manos de los jugadores
     public abstract void repartirManos();
+
 }
