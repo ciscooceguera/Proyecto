@@ -11,6 +11,7 @@ public class Ventana extends JFrame {
     protected JButton fold;
     protected JButton check;
     protected JButton raise;
+    protected JButton pilaDeFichas;
     protected JButton call;
     protected JTextArea mensajeTurno;
     protected JButton bannerMsg;
@@ -60,6 +61,10 @@ public class Ventana extends JFrame {
         bannerMsg = botonRectangularBordeado("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\bannerMsg.png",
                 480,240,0);
         botonesCartasComunitarias = new ArrayList<>();
+
+        pilaDeFichas = botonRectangularBordeado("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\pilaDeFichas.png");
+        pilaDeFichas.setBounds(700,320,120,120);
+        this.add(pilaDeFichas);
     }
     // crea la interfaz para el texas hold 'em
     public void crearInterfazTexas(){
@@ -84,6 +89,23 @@ public class Ventana extends JFrame {
         check.setVisible(false);
 
         bannerMsg.setBounds(0,50,480,240);
+
+        fold.addActionListener(e ->{
+
+        });
+
+        call.addActionListener(e -> {
+
+        });
+
+        raise.addActionListener(e -> {
+
+        });
+
+        check.addActionListener(e -> {
+
+
+        });
 
         this.add(fold);
         this.add(raise);
@@ -241,7 +263,7 @@ public class Ventana extends JFrame {
         textDineroJugador.setText("$"+dinero);
         try {
             Font cinzelDec = Font.createFont(Font.TRUETYPE_FONT
-                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Regular.ttf"))
+                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
                     .deriveFont(Font.BOLD, 100f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(cinzelDec);
@@ -262,15 +284,15 @@ public class Ventana extends JFrame {
         textPot.setText("$"+pot);
         try {
             Font cinzelDec = Font.createFont(Font.TRUETYPE_FONT
-                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Regular.ttf"))
-                    .deriveFont(Font.BOLD, 150f);
+                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
+                    .deriveFont(Font.BOLD, 80f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(cinzelDec);
             textPot.setFont(cinzelDec);
-            textPot.setForeground(Color.YELLOW);
+            textPot.setForeground(Color.WHITE);
         }catch(Exception e){
         }
-        textPot.setBounds(1450,50,420,230);
+        textPot.setBounds(850,340,420,230);
         textPot.setVisible(true);
         textPot.setOpaque(false);
         textPot.setBorder(null);
