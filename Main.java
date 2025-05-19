@@ -76,12 +76,15 @@ public class Main {
         ventana.setVisible(true);
         jugar.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
+                ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\pokerPregunta.png");
+                Image preImagen = imagen.getImage();
+                imagen = new ImageIcon(preImagen.getScaledInstance(50,50,Image.SCALE_SMOOTH));
                 int numJugadores = 0;
                 Object[] botones = {"Texas Hold 'em","Otro juego"};
                 int tipoPoker = JOptionPane.showOptionDialog(ventana,
                         "Elige modalidad","Modalidad",
                         JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
-                        null, botones, botones[0]);
+                        imagen, botones, botones[0]);
                 String tipoPokerStr = "";
                 switch (tipoPoker){
                     case 0:

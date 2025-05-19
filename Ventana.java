@@ -1,12 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.ArrayList;
-
 public class Ventana extends JFrame {
     protected JButton fold;
     protected JButton check;
@@ -258,6 +259,15 @@ public class Ventana extends JFrame {
         mensajeTurno.setEnabled(false);
         this.add(mensajeTurno);
     }
+    public int apostar(){
+        int dineroApostado = 0;
+        bet.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        return dineroApostado;
+    }
     // muestra el dinero del jugador
     public void mostrarDineroJugador(int dinero){
         textDineroJugador.setText("$"+dinero);
@@ -299,7 +309,4 @@ public class Ventana extends JFrame {
         textPot.setEnabled(false);
         this.add(textPot);
     }
-
-
-
 }
