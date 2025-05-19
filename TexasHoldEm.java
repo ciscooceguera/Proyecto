@@ -1,60 +1,106 @@
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class TexasHoldEm extends JuegoDePoker {
     private ArrayList<Carta> cartasComunitarias;
-    Ventana ventana;
-    public TexasHoldEm(int numJugadores){
-        super(numJugadores);
+    private Ventana ventana;
+    public TexasHoldEm(int numJugadores,String tipoPoker){
+        super(numJugadores,tipoPoker);
         iniciarJuego();
-        entregarDinero();
     }
-  
     public void iniciarJuego(){
-        ventana = new Ventana("Texas HoldEm");
+        ventana = new Ventana("Texas HoldEm",this);
+        ventana.setVisible(true);
+        mostrarDineroTurnoActual();
+        mostrarManoEnTurno();
+        mostrarDineroEnElBote();
+        mostrarMensajeEnBanner();
+        preguntarCiega();
+        pagarCiegaPequeña();
+        cambiarTurno();
+        pagarCiegaGrande();
+        cambiarTurno();
+    }
+    /*
+    public void nuevaRonda(){
+        boteInt = 0;
+        jugadorEnTurno = 1;
+        mazo.clearMazo();
+        mazo.crearMazo();
+        mazo.revolverMazo();
+        repartirManos();
+        mostrarDineroTurnoActual();
+        mostrarManoEnTurno();
+        mostrarDineroEnElBote();
+        mostrarMensajeEnBanner();
+        pagarCiegaPequeña();
+        cambiarTurno();
+        pagarCiegaGrande();
+        cambiarTurno();
+    }
+    */
+
+    public void mostrarManoEnTurno(){
+        ventana.mostrarCartasJugadorTurno(jugadores.get(jugadorEnTurno-1).getMano());
     }
     // implementa repartirManos() que es abstracto, llena el arraylist de manos de acuerdo al # de jugadores
     @Override
     public void repartirManos(){
         for (int i = 0; i < numJugadores; i++){
-           manos.add(new Mano(mazo.tomarCartas(2)));
+           Jugador jugador = jugadores.get(i);
+           jugador.setMano(new Mano(mazo.tomarCartas(2)));
+           jugadores.set(i, jugador);
         }
     }
-
-    public void entregarDinero(){
-        Object[] botones = {"200","500","1000"};
-        ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\dineroPregunta.png");
-        Image preImagen = imagen.getImage();
-        imagen = new ImageIcon(preImagen.getScaledInstance(50,50,Image.SCALE_SMOOTH));
-        int opcionDinero = JOptionPane.showOptionDialog(null,
-                "¿Cuánto dinero quieres que tenga cada jugador?", "Dinero",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, imagen
-                ,botones, botones[0]);
-        int dineroInicial=0;
-        switch(opcionDinero){
-            case 0:
-                dineroInicial=200;
-                break;
-            case 1:
-                dineroInicial=500;
-                break;
-            case 2:
-                dineroInicial=1000;
-                break;
-            default:
-                dineroInicial=0;
+    public void mostrarDineroEnElBote(){
+        ventana.mostrarPot(boteInt);
+    }
+    public void mostrarDineroTurnoActual(){
+        ventana.setTextDineroJugador(jugadores.get(jugadorEnTurno-1).getDinero());
+    }
+    public void mostrarMensajeEnBanner(){
+        ventana.mostrarMensajeTurno(jugadores.get(jugadorEnTurno-1).getNombre());
+    }
+    public void cambiarTurno(){
+        int jugadorHizoFold = 1;
+        while (jugadorHizoFold == 1) {
+            jugadorEnTurno = jugadorEnTurno % numJugadores + 1;
+            if (!foldJugadores.contains(jugadorEnTurno)) {
+                jugadorHizoFold=0;
+            }else if (evaluarJugadorSinDinero()){
+                jugadores.remove(jugadorEnTurno);
+            }
         }
-        for(int i=0;i<numJugadores;i++){
-            dinero[i]=dineroInicial;
-            System.out.println(dinero[i]);
+        mostrarDineroTurnoActual();
+        mostrarDineroEnElBote();
+        mostrarMensajeEnBanner();
+        if (verificarNumJugadoresRestantes()==1){
+            finRonda();
         }
+    }
+    public boolean evaluarJugadorSinDinero(){
+        if (jugadores.get(jugadorEnTurno-1).getDinero() == 0){
+            return true;
+        }
+        return false;
+    }
+    public void finRonda(){
+        JOptionPane.showMessageDialog(null,"Ganador ronda: " + jugadores.get(jugadorEnTurno-1).getNombre());
+        //nuevaRonda();
+    }
+    public void finDelJuego(){
+        JOptionPane.showMessageDialog(null,"Ganador juego: " + jugadores.get(jugadorEnTurno-1).getNombre());
+        ventana.endGame();
+    }
+    public int verificarNumJugadoresRestantes(){
+        if (jugadores.size()-foldJugadores.size() == 1){
+            return 1;
+        }
+        return 0;
     }
 
     public void preguntarCiega() {
-        int ciegaPequeña = 0;
         while (ciegaPequeña < 1 || ciegaPequeña > 10) {
             String ciegaStr = JOptionPane.showInputDialog(null,
                     "¿Cuánto se pagará de ciega pequeña? $1-$10", "Ciega pequeña",
@@ -70,17 +116,28 @@ public class TexasHoldEm extends JuegoDePoker {
     }
 
     public void pagarCiegaPequeña(){
-        dinero[jugadorEnTurno]-=ciegaPequeña;
-        bote+=ciegaPequeña;
+        Jugador jugador = jugadores.get(jugadorEnTurno-1);
+        jugador.reducirDinero(ciegaPequeña);
+        jugadores.set(jugadorEnTurno-1, jugador);
+        boteInt+=ciegaPequeña;
+        ventana.mostrarPot(boteInt);
     }
 
     public void pagarCiegaGrande(){
-        dinero[jugadorEnTurno]-=ciegaGrande;
-        bote+=ciegaGrande;
+        Jugador jugador = jugadores.get(jugadorEnTurno-1);
+        jugador.reducirDinero(ciegaGrande);
+        jugadores.set(jugadorEnTurno-1, jugador);
+        boteInt+=ciegaGrande;
+        ventana.mostrarPot(boteInt);
     }
-    public void apostar(int dineroApostado){
-        dinero[jugadorEnTurno]-=dineroApostado;
-        bote+=dineroApostado;
+    public void subir(){
+        String apuesta = JOptionPane.showInputDialog(null,"Ingresa dinero: ","Apuesta",JOptionPane.PLAIN_MESSAGE);
+        int dineroApostado = Integer.parseInt(apuesta);
+        Jugador jugador = jugadores.get(jugadorEnTurno-1);
+        jugador.reducirDinero(dineroApostado);
+        jugadores.set(jugadorEnTurno-1, jugador);
+        boteInt+=dineroApostado;
+        ventana.mostrarPot(boteInt);
         apuestaMasGrande=dineroApostado;
         ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\apuestaImagen.png");
         Image imagenAEscalar = imagen.getImage();
@@ -90,8 +147,11 @@ public class TexasHoldEm extends JuegoDePoker {
                 imagen);
     }
     public void callear(){
-        dinero[jugadorEnTurno]-=apuestaMasGrande;
-        bote+=apuestaMasGrande;
+        Jugador jugador = jugadores.get(jugadorEnTurno-1);
+        jugador.reducirDinero(apuestaMasGrande);
+        jugadores.set(jugadorEnTurno-1, jugador);
+        boteInt+=apuestaMasGrande;
+        ventana.mostrarPot(boteInt);
         ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\callImagen.png");
         Image imagenAEscalar = imagen.getImage();
         imagen = new ImageIcon(imagenAEscalar.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -101,13 +161,11 @@ public class TexasHoldEm extends JuegoDePoker {
                 imagen);
     }
     public void foldear(){
-        manos.remove(jugadorEnTurno);
-        ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\quitImagen.png");
-        Image imagenAEscalar = imagen.getImage();
-        imagen = new ImageIcon(imagenAEscalar.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        JOptionPane.showMessageDialog(null,
-                "Jugador "+jugadorEnTurno+" ha foldeado!",
-                "Anuncio de Fold",JOptionPane.INFORMATION_MESSAGE,
-                imagen);
+        foldJugadores.add(jugadorEnTurno-1);
+        cambiarTurno();
     }
+    public void check(){
+
+    }
+
 }

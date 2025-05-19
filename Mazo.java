@@ -33,6 +33,10 @@ public class Mazo {
         }
         return cartas;
     }
+    // Limpia el mazo
+    public void clearMazo(){
+        mazo.clear();
+    }
     // toma una carta
     public Carta tomarCarta(){
         return mazo.removeFirst();

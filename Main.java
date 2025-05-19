@@ -104,15 +104,8 @@ public class Main {
                                         );
                             }
                         }
-                        String [] jugadoresJuego1 = new String[numJugadores];
-                        for(int i = 0; i < numJugadores; i++){
-                            String nombreJugador = JOptionPane.showInputDialog(ventana,
-                                    "Ingresa el nombre del jugador "+(i+1),
-                                    "Nombre del jugador", JOptionPane.QUESTION_MESSAGE);
-                            jugadoresJuego1[i] = nombreJugador;
-                        }
-                        System.out.println(Arrays.toString(jugadoresJuego1));
-                        JuegoDePoker juego = new TexasHoldEm(numJugadores);
+
+                        JuegoDePoker juego = new TexasHoldEm(numJugadores,"Texas HoldEm");
                         break;
                     case 1:
                         while (numJugadores<2 || numJugadores>7) {
@@ -126,16 +119,8 @@ public class Main {
                                         "Error",JOptionPane.ERROR_MESSAGE);
                             }
                         }
-                        String [] jugadoresJuego2 = new String[numJugadores];
-                        for(int i = 0; i < numJugadores; i++){
-                            String nombreJugador = JOptionPane.showInputDialog(ventana,
-                                    "Ingresa el nombre del jugador "+(i+1),
-                                    "Nombre del jugador", JOptionPane.QUESTION_MESSAGE);
-                            jugadoresJuego2[i] = nombreJugador;
-                        }
-                        System.out.println(Arrays.toString(jugadoresJuego2));
                         tipoPokerStr = "Otro juego";
-                        JuegoDePoker cardDraw5 = new CardDraw5(numJugadores);
+                        JuegoDePoker cardDraw5 = new CardDraw5(numJugadores,tipoPokerStr);
                         break;
                 }
             }
