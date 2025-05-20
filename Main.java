@@ -4,9 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 
 public class Main extends JFrame{
@@ -15,18 +13,15 @@ public class Main extends JFrame{
     }
 
     public static void crearVentana(){
-        JFrame ventana = new JFrame();
-        ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        ventana.setUndecorated(true);
-        ventana.setResizable(false);
 
         JFrame ventana = new JFrame("Casino Guasavito");
+        ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
         ventana.setSize(500,500);
         ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(null);
-
-        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoMain.png");
+        ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoMain.png");
+        //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoMain.png");
         Image imagenAEscalar = pic.getImage().getScaledInstance(1550, 1000, Image.SCALE_SMOOTH);
         pic = new ImageIcon(imagenAEscalar);
         JLabel image = new JLabel(pic);
@@ -38,7 +33,9 @@ public class Main extends JFrame{
         panel.setBounds(0, 0, 1920, 1080);
         panel.setOpaque(false);
 
-        String rutaBotones="C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesMain\\";
+        //String rutaBotones="C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesMain\\";
+        String rutaBotones="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\BotonesMain\\";
+
 
         String rutaJugar=rutaBotones+"botonJugar.png";
         String rutaJugarPress=rutaBotones+"botonJugarPress.png";
@@ -74,7 +71,8 @@ public class Main extends JFrame{
                 jugar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 jugar.setLayout(null);
 
-                ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoTipo.png");
+                //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoTipo.png");
+                ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoTipo.png");
                 Image imagenAEscalar = pic.getImage().getScaledInstance(1550, 1000, Image.SCALE_SMOOTH);
                 pic = new ImageIcon(imagenAEscalar);
                 JLabel image = new JLabel(pic);
@@ -86,7 +84,8 @@ public class Main extends JFrame{
                 panel.setBounds(0, 0, 1920, 1080);
                 panel.setOpaque(false);
 
-                String rutaBotones="C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTipo\\";
+                String rutaBotones="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\BotonesTipo";
+                //String rutaBotones="C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTipo\\";
 
                 String rutaTexas = rutaBotones+"botonTexas.png";
                 String rutaTexasPress = rutaBotones+"botonTexasPress.png";
@@ -188,7 +187,7 @@ public class Main extends JFrame{
 //                        JuegoDePoker cardDraw5 = new CardDraw5(numJugadores);
 //                        break;
 //                }
-=======
+
                 ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\pokerPregunta.png");
                 Image preImagen = imagen.getImage();
                 imagen = new ImageIcon(preImagen.getScaledInstance(50,50,Image.SCALE_SMOOTH));
@@ -287,5 +286,10 @@ public class Main extends JFrame{
             }
         });
         return boton;
+
+
+
     }
+
+
 }

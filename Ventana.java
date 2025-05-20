@@ -1,5 +1,8 @@
+import javax.annotation.processing.SupportedSourceVersion;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.geom.RoundRectangle2D;
@@ -45,6 +48,7 @@ public class Ventana extends JFrame {
             super.setTitle("Card Draw 5");
         }
     }
+
     // inicializa los botones
     public void inicializarComponentes(){
         String rutaDefault = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\BotonesImage\\";
@@ -78,6 +82,7 @@ public class Ventana extends JFrame {
         pilaDeFichas.setBounds(700,320,120,120);
         this.add(pilaDeFichas);
     }
+
     // crea la interfaz para el texas hold 'em
     public void crearInterfazTexas(){
         JPanel panelFondo = new JPanel(){
@@ -259,21 +264,51 @@ public class Ventana extends JFrame {
         boton.setOpaque(false);
         return boton;
     }
+
+
+    public void reiniciarCartasComunitarias(){
+        //this.remove(cartasComunitarias);
+
+        System.out.println("Componentes antes del rem: " + cartasComunitarias.getComponentCount());
+        System.out.println("Componentes despues del remove: " + cartasComunitarias.getComponentCount());
+
+        //this.add(cartasComunitarias);
+        cartasComunitarias.removeAll();
+        cartasComunitarias.revalidate();
+        cartasComunitarias.repaint();
+
+        this.revalidate();
+        this.repaint();
+    }
+
     // Muestra las cartas comunitarias en la mesa.
     public void mostrarCartasComunitarias(ArrayList<Carta> cartas){
-
+        System.out.println(cartas);
+        cartasComunitarias.revalidate();
+        cartasComunitarias.repaint();
         int x = 0;
         int y = 0;
         int anchoCarta = 145;
         int altoCarta = 181;
         int xIncrementos = 166;
-
-        for (Carta carta : cartas){
-            JButton botonCarta = crearBotonRectangularBordeado(carta.obtenerImgRuta());
+        for (Carta c : cartas){
+            JButton botonCarta = crearBotonRectangularBordeado(c.obtenerImgRuta());
             botonCarta.setBounds(x,y,anchoCarta,altoCarta);
             x+=xIncrementos;
             cartasComunitarias.add(botonCarta);
         }
+        cartasComunitarias.revalidate();
+        cartasComunitarias.repaint();
+        this.revalidate();
+        this.repaint();
+    }
+    public void switchCallPorCheck(){
+        call.setVisible(false);
+        check.setVisible(true);
+    }
+    public void switchCheckPorCall(){
+        check.setVisible(false);
+        call.setVisible(true);
     }
     // Muestra la mano del jugador
     public void mostrarCartasJugadorTurno(Mano cartas){
@@ -324,8 +359,9 @@ public class Ventana extends JFrame {
     }
 
     // muestra el dinero del jugador
-    public void mostrarDineroJugador(int dinero){
-        textDineroJugador.setText("$"+dinero);
+    public void mostrarDineroJugador(int dinero) {
+        textDineroJugador.setText("$" + dinero);
+    }
     // inicializa el panel del dinero
     public void inicializarCuadrosDeTextos(){
         textDineroJugador.setText("$");
@@ -437,6 +473,18 @@ public class Ventana extends JFrame {
         check.setEnabled(false);
         raise.setEnabled(false);
         call.setEnabled(false);
+        JButton botonSalir = new JButton("Salir");
+        JPanel salirPanel = new JPanel();
+        salirPanel.setLayout(null);
+        salirPanel.setBounds(1800,900,100,30);
+        botonSalir.setBounds(0,0,100,30);
+        salirPanel.add(botonSalir);
+        botonSalir.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
+        this.add(salirPanel);
     }
     public void mostrarDineroDeTodosLosJugadores(ArrayList<Jugador> jugadores){
         String mensajeDinero = "";

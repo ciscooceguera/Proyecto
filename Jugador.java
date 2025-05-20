@@ -1,10 +1,11 @@
 public class Jugador implements Comparable{
     private String nombre;
     private int dinero;
-    private Mano mano;
+    private Mano mano, manoComunitaria;
     public Jugador(String nombre, int dinero) {
         this.nombre = nombre;
         this.dinero = dinero;
+
     }
     public void incrementarDinero(int sumDinero){
         dinero += sumDinero;
@@ -24,9 +25,18 @@ public class Jugador implements Comparable{
     public void setMano(Mano mano){
         this.mano = mano;
     }
+    public void setManoComunitaria(Mano manoComunitaria){
+        this.manoComunitaria = new Mano(manoComunitaria.getMano());
+    }
+
+
     @Override
     public int compareTo(Object o){
         Jugador jugador = (Jugador)o;
-        return mano.compareTo(jugador.mano);
+        return manoComunitaria.compareTo(jugador.manoComunitaria);
+    }
+
+    public String toString(){
+        return "\nNombre: " + nombre + "\nDinero: " + dinero + "\nMano: " + mano;
     }
 }
