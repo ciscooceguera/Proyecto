@@ -4,7 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 
 public class Main extends JFrame{
     public static void main(String[] args) {
@@ -16,6 +19,9 @@ public class Main extends JFrame{
         ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
         ventana.setUndecorated(true);
         ventana.setResizable(false);
+
+        JFrame ventana = new JFrame("Casino Guasavito");
+        ventana.setSize(500,500);
         ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(null);
@@ -182,6 +188,54 @@ public class Main extends JFrame{
 //                        JuegoDePoker cardDraw5 = new CardDraw5(numJugadores);
 //                        break;
 //                }
+=======
+                ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\pokerPregunta.png");
+                Image preImagen = imagen.getImage();
+                imagen = new ImageIcon(preImagen.getScaledInstance(50,50,Image.SCALE_SMOOTH));
+                int numJugadores = 0;
+                Object[] botones = {"Texas Hold 'em","Otro juego"};
+                int tipoPoker = JOptionPane.showOptionDialog(ventana,
+                        "Elige modalidad","Modalidad",
+                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
+                        imagen, botones, botones[0]);
+                String tipoPokerStr = "";
+                switch (tipoPoker){
+                    case 0:
+                        while (numJugadores<2 || numJugadores>10) {
+                            String numJugadoresStr = JOptionPane.showInputDialog(ventana,
+                                    "Número de jugadores", "Jugadores",
+                                    JOptionPane.QUESTION_MESSAGE);
+                            try{
+                                numJugadores = Integer.parseInt(numJugadoresStr);
+                                if (numJugadores<2 || numJugadores>10) {
+                                    JOptionPane.showMessageDialog(null,
+                                            "Solo pueden jugar 2 - 10 jugadores",
+                                            "Error",JOptionPane.ERROR_MESSAGE);
+                                }
+                            }catch (NumberFormatException exception){
+                                JOptionPane.showMessageDialog(null,"Ingrese un número de jugadores"
+                                        );
+                            }
+                        }
+
+                        JuegoDePoker juego = new TexasHoldEm(numJugadores,"Texas HoldEm");
+                        break;
+                    case 1:
+                        while (numJugadores<2 || numJugadores>7) {
+                            String numJugadoresStr = JOptionPane.showInputDialog(ventana,
+                                    "Número de jugadores", "Jugadores",
+                                    JOptionPane.QUESTION_MESSAGE);
+                            numJugadores = Integer.parseInt(numJugadoresStr);
+                            if (numJugadores<2 || numJugadores>7) {
+                                JOptionPane.showMessageDialog(null,
+                                        "Solo pueden jugar 2 - 7 jugadores",
+                                        "Error",JOptionPane.ERROR_MESSAGE);
+                            }
+                        }
+                        tipoPokerStr = "Otro juego";
+                        JuegoDePoker cardDraw5 = new CardDraw5(numJugadores,tipoPokerStr);
+                        break;
+                }
             }
         });
         creditos.addActionListener(new ActionListener() {
