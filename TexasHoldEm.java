@@ -9,11 +9,13 @@ public class TexasHoldEm extends JuegoDePoker {
     private int countCalls = 0;
     private ArrayList<Carta> cartasComunitarias;
     private Ventana ventana;
+
     public TexasHoldEm(int numJugadores){
         super(numJugadores);
         cartasComunitarias = new ArrayList<>();
         iniciarJuego();
     }
+
     public void iniciarJuego(){
         ventana = new Ventana("Texas HoldEm",this);
         ventana.setVisible(true);
@@ -30,6 +32,7 @@ public class TexasHoldEm extends JuegoDePoker {
         iniciarCartasComunitarias();
         ventana.mostrarManos(jugadores);
     }
+
     public void nuevaRonda(){
         jugadores.getLast().incrementarDinero(boteInt);
         evaluarJugadorSinDinero();
@@ -68,15 +71,18 @@ public class TexasHoldEm extends JuegoDePoker {
         cartasComunitarias = mazo.tomarCartas(3);
         ventana.mostrarCartasComunitarias(cartasComunitarias);
     }
+
     public void agregarCartaComunitaria(){
       if (!(cartasComunitarias.size() == 5)){
             cartasComunitarias.add(mazo.tomarCarta());
             ventana.mostrarCartasComunitarias(cartasComunitarias);
         }
     }
+
     public void mostrarManoEnTurno(){
         ventana.mostrarCartasJugadorTurno(jugadores.get(jugadorEnTurno-1).getMano());
     }
+
     // implementa repartirManos() que es abstracto, llena el arraylist de manos de acuerdo al # de jugadores
     @Override
     public void repartirManos(){
@@ -86,6 +92,7 @@ public class TexasHoldEm extends JuegoDePoker {
            jugadores.set(i, jugador);
         }
     }
+
     public void mostrarDineroEnElBote(){
         ventana.mostrarPot(boteInt);
     }
@@ -93,9 +100,11 @@ public class TexasHoldEm extends JuegoDePoker {
         ventana.setTextDineroJugador(jugadores.get(jugadorEnTurno-1).getDinero());
         mostrarManoEnTurno();
     }
+
     public void mostrarMensajeEnBanner(){
         ventana.mostrarMensajeTurno(jugadores.get(jugadorEnTurno-1).getNombre());
     }
+
     public void cambiarTurno(){
         int jugadorHizoFold = 1;
         while (jugadorHizoFold == 1) {
@@ -113,9 +122,11 @@ public class TexasHoldEm extends JuegoDePoker {
         }
         actualizarDineroPlayers();
     }
+
     public void evaluarJugadorSinDinero(){
         jugadores.removeIf(jugador -> jugador.getDinero()<=0);
     }
+
     public void finRonda(){
         int posicionGanador = 0;
         if (verificarNumJugadoresRestantes()==1) {
@@ -140,11 +151,13 @@ public class TexasHoldEm extends JuegoDePoker {
             nuevaRonda();
         }
     }
+
     public void finDelJuego(){
         JOptionPane.showMessageDialog(null,"Ganador juego: " + jugadores.getFirst().getNombre());
         ventana.endGame();
 
     }
+
     public int verificarNumJugadoresRestantes(){
         if (jugadores.size()-foldJugadores.size() == 1){
             return 1;
@@ -199,6 +212,7 @@ public class TexasHoldEm extends JuegoDePoker {
             ventana.switchCallPorCheck();
         }
     }
+
     public void subir(){
         String apuesta = JOptionPane.showInputDialog(null,"Ingresa dinero: ","Apuesta",JOptionPane.PLAIN_MESSAGE);
         int dineroApostado = Integer.parseInt(apuesta);
@@ -227,6 +241,7 @@ public class TexasHoldEm extends JuegoDePoker {
             }
         }
     }
+
     public void callear(){
         countCalls++;
         if (jugadores.get(jugadorEnTurno-1).getDinero() != 0) {
@@ -257,6 +272,7 @@ public class TexasHoldEm extends JuegoDePoker {
             apuestaMasGrande = 0;
         }
     }
+
     public void foldear(){
         foldJugadores.add(jugadorEnTurno-1);
         cambiarTurno();
@@ -265,8 +281,8 @@ public class TexasHoldEm extends JuegoDePoker {
     public void check(){
         cambiarTurno();
         verificarSiYaTodosDecidieronAcciones();
-
     }
+
     public void  verificarSiYaTodosDecidieronAcciones(){
         if (jugadorEnTurno-1 == 0){
             if (countRondas >= 1){
@@ -275,9 +291,8 @@ public class TexasHoldEm extends JuegoDePoker {
             countRondas++;
         }
     }
+
     public void actualizarDineroPlayers(){
         ventana.mostrarDineroDeTodosLosJugadores(jugadores);
     }
-
-
 }

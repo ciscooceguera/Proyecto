@@ -10,6 +10,7 @@ public abstract class JuegoDePoker   {
     protected ArrayList<Jugador> jugadores;
     protected int numJugadores, ciegaPequeña, ciegaGrande, boteInt, jugadorEnTurno, apuestaMasGrande,dineroInicial;
     protected String tipoDePoker;
+
     public JuegoDePoker(int numJugadores) {
         this.numJugadores = numJugadores;
         mazo = new Mazo();
@@ -21,8 +22,8 @@ public abstract class JuegoDePoker   {
         jugadorEnTurno = 1;
         apuestaMasGrande = 0;
         inicializarComponentes();
-
     }
+
     // inicializa el mazo y llama repartir manos
     public void inicializarComponentes() {
         mazo.crearMazo();
