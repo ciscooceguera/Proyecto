@@ -22,6 +22,8 @@ public class Main extends JFrame{
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(null);
         ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoMain.png");
+        ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoMain.png");
+        //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoMain.png");
         Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
         pic = new ImageIcon(imagenAEscalar);
         JLabel image = new JLabel(pic);
@@ -70,6 +72,8 @@ public class Main extends JFrame{
                 jugar.setLayout(null);
 
                 ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoTipo.png");
+                //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoTipo.png");
+                ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoTipo.png");
                 Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
                 pic = new ImageIcon(imagenAEscalar);
                 JLabel image = new JLabel(pic);
@@ -82,6 +86,8 @@ public class Main extends JFrame{
                 panel.setOpaque(false);
 
                 String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTipo\\";
+                String rutaBotones="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\BotonesTipo\\";
+                //String rutaBotones="C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTipo\\";
 
                 String rutaTexas = rutaBotones + "botonTexas.png";
                 String rutaTexasPress = rutaBotones + "botonTexasPress.png";
@@ -111,6 +117,8 @@ public class Main extends JFrame{
                         texas.setLayout(null);
 
                         ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadoresTexas.png");
+                        //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadoresTexas.png");
+                        ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoJugadoresTexas.png");
                         Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
                         pic = new ImageIcon(imagenAEscalar);
                         JLabel image = new JLabel(pic);
@@ -118,7 +126,8 @@ public class Main extends JFrame{
                         texas.add(image);
                         texas.setContentPane(image);
 
-                        String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+                        //String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+                        String rutaBotones = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\botonesTexas\\";
                         int y = 100;
                         for(int i=2;i<=10;i++) {
                             String rutaBoton = rutaBotones + "boton" + i + "Jugadores.png";
@@ -154,6 +163,9 @@ public class Main extends JFrame{
                                 informacion.setLayout(null);
 
                                 ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformaciónTexas.png");
+
+                                //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformaciónTexas.png");
+                                ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoInformaciónTexas.png");
                                 Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
                                 pic = new ImageIcon(imagenAEscalar);
                                 JLabel image = new JLabel(pic);
@@ -161,8 +173,8 @@ public class Main extends JFrame{
                                 informacion.add(image);
                                 informacion.setContentPane(image);
 
-                                String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
-
+                                //String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+                                String rutaBotones = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\botonesTexas\\";
                                 String rutaVolver = rutaBotones+"botonVolver.png";
                                 String rutaVolverPress = rutaBotones+"botonVolverPress.png";
                                 JButton botonVolver = crearBoton(rutaVolver, rutaVolverPress);
@@ -197,6 +209,10 @@ public class Main extends JFrame{
                         card5.setLayout(null);
 
                         ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadores5Card.png");
+
+                        //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadores5Card.png");
+                        ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoJugadores5Card.png");
+
                         Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
                         pic = new ImageIcon(imagenAEscalar);
                         JLabel image = new JLabel(pic);
@@ -204,7 +220,9 @@ public class Main extends JFrame{
                         card5.add(image);
                         card5.setContentPane(image);
 
-                        String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+                        //String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+                        String rutaBotones = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\botonesTexas\\";
+
                         int y = 180;
                         for(int i=2;i<=7;i++) {
                             String rutaBoton = rutaBotones + "boton" + i + "Jugadores.png";
@@ -240,6 +258,10 @@ public class Main extends JFrame{
                                 informacion.setLayout(null);
 
                                 ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformación5Card.png");
+
+                                //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformación5Card.png");
+                                ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoInformación5Card.png");
+
                                 Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
                                 pic = new ImageIcon(imagenAEscalar);
                                 JLabel image = new JLabel(pic);
