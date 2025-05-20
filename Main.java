@@ -5,9 +5,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 public class Main extends JFrame{
+    // Main
     public static void main(String[] args) {
         crearVentana();
     }
+    // Crear ventanas
     public static void crearVentana(){
         JFrame ventana = new JFrame();
         ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);

@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
 public class TexasHoldEm extends JuegoDePoker {
@@ -129,7 +128,6 @@ public class TexasHoldEm extends JuegoDePoker {
             for (int i = 0; i < jugadores.size(); i++) {
                 if (!foldJugadores.contains(i)) {
                     JOptionPane.showMessageDialog(null,"Ganador ronda: " + jugadores.get(i).getNombre());
-                    nuevaRonda();
                 }
             }
         }else{
@@ -144,8 +142,8 @@ public class TexasHoldEm extends JuegoDePoker {
             }
             Collections.sort(jugadores);
             JOptionPane.showMessageDialog(null,"Ganador ronda: " + jugadores.getLast().getNombre());
-            nuevaRonda();
         }
+        nuevaRonda();
     }
     // Se encarga de la lógica para concluir el juego, cuando solo queda un jugador con dinero
     public void finDelJuego(){
