@@ -35,15 +35,12 @@ public class Jugador implements Comparable{
     public void setManoComunitaria(Mano manoComunitaria){
         this.manoComunitaria = new Mano(manoComunitaria.getMano());
     }
-
-
     // Se encarga de comparar las manos comunitarias de 2 jugadores mediante la interfaz de Comparable.
     @Override
     public int compareTo(Object o){
         Jugador jugador = (Jugador)o;
         return manoComunitaria.compareTo(jugador.manoComunitaria);
     }
-
     // Se encarga de regresar todos los datos del jugador mediante un método toString().
     public String toString(){
         return "\nNombre: " + nombre + "\nDinero: " + dinero + "\nMano: " + mano;

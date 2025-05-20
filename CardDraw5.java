@@ -1,5 +1,4 @@
 import javax.swing.*;
-import javax.swing.border.TitledBorder;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,7 +13,7 @@ public class CardDraw5 extends JuegoDePoker {
         super(numJugadores);
         iniciarJuego();
     }
-
+    //Se encarga de controlar el flujo de juego.
     public void iniciarJuego(){
         ventana = new Ventana("Card Draw 5",this);
         ventana.setVisible(true);
@@ -32,19 +31,16 @@ public class CardDraw5 extends JuegoDePoker {
         ventana.descartar.setVisible(false);
 
     }
-
+    //Se encarga de iniciar una nueva ronda si es posible.
     public void nuevaRonda() {
         if (!jugadores.isEmpty()) {
             jugadores.getLast().incrementarDinero(boteInt);
         }
-
         evaluarJugadorSinDinero();
-
         if (jugadores.size() <= 1) {
             finDelJuego();
             return;
         }
-
         boteInt = 0;
         countRondas = 0;
         countDescartes = 0;
@@ -52,34 +48,28 @@ public class CardDraw5 extends JuegoDePoker {
         apuestaMasGrande = 0;
         jugadorEnTurno = 1;
         foldJugadores.clear();
-
         mazo.clearMazo();
         mazo.crearMazo();
         mazo.revolverMazo();
         repartirManos();
-
         pagarCiegaPequeña();
         cambiarTurno();
         pagarCiegaGrande();
         cambiarTurno();
-
         actualizarDineroPlayers();
         mostrarDineroTurnoActual();
         mostrarManoEnTurno();
         mostrarDineroEnElBote();
         mostrarMensajeEnBanner();
         ventana.setVisible(true);
-
         countRondas=0;
         verificarSiYaTodosDecidieronAcciones();
-
     }
-
+    //Se encarga de mostrar la mano del jugador en turno en pantalla.
     public void mostrarManoEnTurno(){
         ventana.reiniciarManoFrame();
         ventana.mostrarManoFrame(jugadores.get(jugadorEnTurno-1).getMano().getMano(), countDescartes);
     }
-
     // implementa repartirManos() que es abstracto, llena el arraylist de manos de acuerdo al # de jugadores
     @Override
     public void repartirManos(){
@@ -89,20 +79,20 @@ public class CardDraw5 extends JuegoDePoker {
             jugadores.set(i, jugador);
         }
     }
-
+    //Se encarga de mostrar el dinero en el bote.
     public void mostrarDineroEnElBote(){
         ventana.mostrarPot(boteInt);
     }
-
+    //Se encarga de mostrar el dinero del jugador en el turno actual.
     public void mostrarDineroTurnoActual(){
         ventana.setTextDineroJugador(jugadores.get(jugadorEnTurno-1).getDinero());
         mostrarManoEnTurno();
     }
-
+    //Se encarga de mostrar un mensaje con el jugador en turno.
     public void mostrarMensajeEnBanner(){
         ventana.mostrarMensajeTurno(jugadores.get(jugadorEnTurno-1).getNombre());
     }
-
+    //Se encarga de cambiar el turno durante la partida.
     public void cambiarTurno(){
         int jugadorHizoFold = 1;
         while (jugadorHizoFold == 1) {
@@ -116,17 +106,17 @@ public class CardDraw5 extends JuegoDePoker {
         mostrarMensajeEnBanner();
         actualizarDineroPlayers();
     }
-
+    //Se encarga de eliminar a los jugadores sin dinero.
     public void evaluarJugadorSinDinero(){
         jugadores.removeIf(jugador -> jugador.getDinero()<=0);
     }
-
+    //Se encarga de terminar una ronda y mostrar al ganador de la misma.
     public void finRonda(){
         int posicionGanador = 0;
         if (verificarNumJugadoresRestantes()==1) {
             for (int i = 0; i < jugadores.size(); i++) {
                 if (!foldJugadores.contains(i)) {
-                    JOptionPane.showMessageDialog(null,"Ganador ronda: " + jugadores.get(posicionGanador).getNombre());
+                    JOptionPane.showMessageDialog(null,"Ganador Ronda: " + jugadores.get(posicionGanador).getNombre());
                     nuevaRonda();
                 }
             }
@@ -139,24 +129,24 @@ public class CardDraw5 extends JuegoDePoker {
                 }
             }
             Collections.sort(jugadores);
-            JOptionPane.showMessageDialog(null,"Ganador ronda: " + jugadores.getLast().getNombre());
+            JOptionPane.showMessageDialog(null,"Ganador Ronda: " + jugadores.getLast().getNombre());
             nuevaRonda();
         }
     }
-
+    //Se encarga de finalizar el juego y mostrar al ganador.
     public void finDelJuego(){
-        JOptionPane.showMessageDialog(null,"Ganador juego: " + jugadores.getFirst().getNombre());
+        JOptionPane.showMessageDialog(null,"Ganador Juego: " + jugadores.getFirst().getNombre());
         //ventana.endGame();
         ventana.dispose();
     }
-
+    //Se encarga de contar a los jugadores restantes.
     public int verificarNumJugadoresRestantes(){
         if (jugadores.size()-foldJugadores.size() == 1){
             return 1;
         }
         return 0;
     }
-
+    //Se encarga de preguntar a los jugadores antes de iniciar cuál será la ciega a pagarse.
     public void preguntarCiega() {
         while (ciegaPequeña < 1 || ciegaPequeña > 10) {
             String ciegaStr = JOptionPane.showInputDialog(null,
@@ -171,7 +161,7 @@ public class CardDraw5 extends JuegoDePoker {
             }
         }
     }
-
+    //Se encarga de pedir a un jugador pagar la ciega pequeña.
     public void pagarCiegaPequeña(){
         Jugador jugador = jugadores.get(jugadorEnTurno-1);
         if (jugador.getDinero() >= ciegaPequeña) {
@@ -186,7 +176,7 @@ public class CardDraw5 extends JuegoDePoker {
         ventana.mostrarPot(boteInt);
         countCalls++;
     }
-
+    //Se encarga de pedir a un jugador pagar la ciega graande.
     public void pagarCiegaGrande(){
         Jugador jugador = jugadores.get(jugadorEnTurno-1);
         if (jugador.getDinero() >= ciegaGrande) {
@@ -207,7 +197,7 @@ public class CardDraw5 extends JuegoDePoker {
             }
         }
     }
-
+    //Se encarga de subir la apuesta más alta hasta el momento.
     public void subir(){
         String apuesta = JOptionPane.showInputDialog(null,"Ingresa dinero: ","Apuesta",JOptionPane.PLAIN_MESSAGE);
         int dineroApostado = Integer.parseInt(apuesta);
@@ -236,7 +226,7 @@ public class CardDraw5 extends JuegoDePoker {
             }
         }
     }
-
+    //Se encarga de pagar la apuesta más grande hasta el momento.
     public void callear(){
         countCalls++;
         if (jugadores.get(jugadorEnTurno-1).getDinero() != 0) {
@@ -249,13 +239,6 @@ public class CardDraw5 extends JuegoDePoker {
             jugadores.set(jugadorEnTurno - 1, jugador);
             boteInt += apuestaMasGrande;
             ventana.mostrarPot(boteInt);
-            ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\callImagen.png");
-            Image imagenAEscalar = imagen.getImage();
-            imagen = new ImageIcon(imagenAEscalar.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        /*JOptionPane.showMessageDialog(null,
-                "Jugador "+jugadorEnTurno+" ha apostado +"+apuestaMasGrande+"!",
-                "Anuncio de Call",JOptionPane.INFORMATION_MESSAGE,
-                imagen);*/
             cambiarTurno();
             verificarSiYaTodosDecidieronAcciones();
         }else{
@@ -270,17 +253,18 @@ public class CardDraw5 extends JuegoDePoker {
             apuestaMasGrande = 0;
         }
     }
-
+    //Se encarga de abandonar la mano actual y abandonar la ronda.
     public void foldear(){
         foldJugadores.add(jugadorEnTurno-1);
         cambiarTurno();
         verificarSiYaTodosDecidieronAcciones();
     }
+    //Se encarga de pasar la ronda si no hay apuesta más alta.
     public void check(){
         cambiarTurno();
         verificarSiYaTodosDecidieronAcciones();
     }
-
+    //Se encarga de verificar si todos los jugadores ya hicieron alguna acción.
     public void  verificarSiYaTodosDecidieronAcciones(){
         if (jugadorEnTurno-1 == 0){
             if (countRondas >= 3){
@@ -302,6 +286,7 @@ public class CardDraw5 extends JuegoDePoker {
             countRondas++;
         }
     }
+    //Se encarga de descartar alguna de las cartas de tu mano.
     public void descartar(ArrayList<Carta> cartas){
         Mano mano = jugadores.get(jugadorEnTurno-1).getMano();
         for (int i = 0 ; i < cartas.size(); i++) {
@@ -320,6 +305,7 @@ public class CardDraw5 extends JuegoDePoker {
         cambiarTurno();
         verificarSiYaTodosDecidieronAcciones();
     }
+    //Se encarga de actualizar el dinero de los jugadores.
     public void actualizarDineroPlayers(){
         ventana.mostrarDineroDeTodosLosJugadores(jugadores);
     }

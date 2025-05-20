@@ -11,22 +11,11 @@ public class Mano implements Comparable{
     public ArrayList<Carta> getMano() {
         return mano;
     }
-    public Carta eliminarCarta(int posicion){
-        return mano.remove(posicion);
-    }
     /* Retorna tipo int, devuelve el valor de la carta con el mayor valor en la mano
     ignorando el As. */
-    public int getValorMayor(){
-        if (mano.getLast().getValor() == 14){
-            return mano.get(mano.size()-2).getValor();
-        }
-        return mano.getLast().getValor();
-
-    }
     public boolean esEscalera(){
         acomodarMano();
         List<Integer> valores = new ArrayList<>();
-
         for (Carta carta : mano) {
             int valor = carta.getValor();
             if (!valores.contains(valor)) {
@@ -37,7 +26,6 @@ public class Mano implements Comparable{
             valores.add(1);
             Collections.sort(valores);
         }
-
         int consecutivos = 1;
         for (int i = 0; i < valores.size() - 1; i++) {
             if (valores.get(i + 1) == valores.get(i) + 1) {
@@ -79,6 +67,7 @@ public class Mano implements Comparable{
         }
         return false;
     }
+    //Se encarga de contar los repetidos de una mano.
     public int cuantasRepetidas(Carta carta){
         int contadorCartasRepetidas = 1;
         for (Carta cartas : mano) {
@@ -98,6 +87,7 @@ public class Mano implements Comparable{
         }
         return false;
     }
+    //Se encarga de obtener el valor del póker.
     public int getValorPoquer(){
         for (Carta carta : mano){
             int numRepetidas = cuantasRepetidas(carta);
@@ -111,6 +101,7 @@ public class Mano implements Comparable{
     public void acomodarMano(){
         Collections.sort(mano);
     }
+    //Se encarga de determinar si todas son del mismo palo (figura).
     public boolean esMismaFigura(){
         int contadorRepeticionesFigura = 0;
         String figuraActual = "";
@@ -147,6 +138,7 @@ public class Mano implements Comparable{
         }
         return contadorRepeticionesColor == mano.size();
     }
+    //Se encarga de determinar si hay full house.
     public boolean esFullHouse(){
         return hayPar() && hayTercia();
     }
@@ -170,18 +162,19 @@ public class Mano implements Comparable{
         }
         return manoString;
     }
+    // Se encarga de obtener el valor más alta de la mano.
     public int getCartaMasAlta(){
         return Collections.max(mano).getValor();
     }
+    //Se encarga de obtener si hay una escalera de color.
     public boolean esFlush(){
         return !esEscalera() && esMismaFigura();
     }
-    public ArrayList<Carta> devolverCartas(){
-        return mano;
-    }
+    //Se encarga de obtener el valor más bajo de la mano
     public int getCartaMasBaja(){
         return Collections.min(mano).getValor();
     }
+    //Se encarga de obtener el valor de una tercia.
     public int getValorTercia(){
         for (Carta carta : mano){
             int numRepetidas = cuantasRepetidas(carta);
@@ -191,6 +184,7 @@ public class Mano implements Comparable{
         }
         return 0;
     }
+    //Se encarga de obtener el valor del par más alto.
     public int getValorParMasAlto(){
         ArrayList<Integer> valoresPares = new ArrayList<>();
         for (Carta carta : mano){
@@ -201,6 +195,7 @@ public class Mano implements Comparable{
         }
         return Collections.max(valoresPares);
     }
+    //Se encarga de obtener el valor de un par.
     public int getValorPar(){
         for (Carta carta : mano){
             int numRepetidas = cuantasRepetidas(carta);
@@ -210,8 +205,7 @@ public class Mano implements Comparable{
         }
         return 0;
     }
-
-
+    //Se encarga de obtener el valor más bajo de un par.
     public int getValorParMasBajo(){
         ArrayList<Integer> valoresPares = new ArrayList<>();
         for (Carta carta : mano){
@@ -222,6 +216,7 @@ public class Mano implements Comparable{
         }
         return Collections.min(valoresPares);
     }
+    //Se encarga de obtener el puntaje de la mano, dependiendo de la combinación obtenida.
     public int getPuntaje(){
         int puntajeBase = 0;
         if (esEscaleraReal()){
@@ -247,10 +242,10 @@ public class Mano implements Comparable{
         }
         return puntajeBase;
     }
+    //Se encarga de comparar los puntajes de 2 manos utilizando la interfaz Comparable.
     @Override
     public int compareTo(Object o) {
         Mano m = (Mano) o;
-
         if (getPuntaje() == m.getPuntaje()){
             if (hayDosPares() && m.hayDosPares()){
                 if (getValorParMasAlto() == m.getValorParMasAlto()) {
@@ -281,9 +276,7 @@ public class Mano implements Comparable{
                     return mano.get(mano.size()-2).getValor() - m.mano.get(mano.size()-2).getValor();
                 }
             }
-
         }
-
         return getPuntaje() - m.getPuntaje();
     }
 
@@ -291,7 +284,7 @@ public class Mano implements Comparable{
         mano.addAll(cartasComunitarias);
         acomodarMano();
     }
-
+    //Se encarga de determinar si una carta es igual a otra mediante la interfaz Comparable.
     @Override
     public boolean equals(Object obj) {
         int coincidencias = 0;
@@ -310,7 +303,7 @@ public class Mano implements Comparable{
         }
         return false;
     }
-
+    //Se encarga de eliminar una carta de la mano.
     public void removerCarta(Carta carta){
         Iterator<Carta> it = mano.iterator();
         while (it.hasNext()) {
@@ -320,9 +313,11 @@ public class Mano implements Comparable{
             }
         }
     }
+    //Se encarga de agregar una carta nueva a la mano.
     public void tomarCarta(Carta carta){
         mano.add(carta);
     }
+    //Se encarga de verificar si existe una carta cualquiera en la mano.
     public boolean contieneCarta(Carta carta){
         Iterator<Carta> it = mano.iterator();
         while (it.hasNext()) {

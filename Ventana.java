@@ -95,7 +95,6 @@ public class Ventana extends JFrame {
             }
         };
         panelFondo.setBounds(0, 0, 1920, 1080);
-
         int tamanoFichas = 150;
         int posicionXFichasBotones = 50;
         int posicionYFichasBotones = 530;
