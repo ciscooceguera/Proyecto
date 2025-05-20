@@ -10,9 +10,7 @@ public abstract class JuegoDePoker   {
     protected ArrayList<Jugador> jugadores;
     protected int numJugadores, ciegaPequeña, ciegaGrande, boteInt, jugadorEnTurno, apuestaMasGrande,dineroInicial;
     protected String tipoDePoker;
-    public JuegoDePoker(int numJugadores,String tipoDePoker) {
-
-        this.tipoDePoker = tipoDePoker;
+    public JuegoDePoker(int numJugadores) {
         this.numJugadores = numJugadores;
         mazo = new Mazo();
         foldJugadores = new ArrayList<>();

@@ -4,19 +4,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Arrays;
 import java.util.ArrayList;
 import java.util.Collections;
-
 public class Main extends JFrame{
     public static void main(String[] args) {
         crearVentana();
     }
 
     public static void crearVentana(){
-
-        JFrame ventana = new JFrame("Casino Guasavito");
+        JFrame ventana = new JFrame();
         ventana.setExtendedState(JFrame.MAXIMIZED_BOTH);
-        ventana.setSize(500,500);
+        ventana.setUndecorated(true);
+        ventana.setResizable(false);
+
         ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(null);
@@ -46,13 +47,13 @@ public class Main extends JFrame{
         String rutaCreditos=rutaBotones+"botonCreditos.png";
         String rutaCreditosPress=rutaBotones+"botonCreditosPress.png";
         JButton creditos = crearBoton(rutaCreditos, rutaCreditosPress);
-        creditos.setBounds(500, 500, 500, 500);
+        creditos.setBounds(525, 500, 500, 500);
         creditos.setFocusPainted(false);
 
         String rutaSalir=rutaBotones+"botonSalir.png";
         String rutaSalirPress=rutaBotones+"botonSalirPress.png";
         JButton salir = crearBoton(rutaSalir, rutaSalirPress);
-        salir.setBounds(1050, 500, 600, 500);
+        salir.setBounds(1050, 500, 500, 500);
         salir.setFocusPainted(false);
 
         ventana.add(jugar);
@@ -84,17 +85,18 @@ public class Main extends JFrame{
                 panel.setBounds(0, 0, 1920, 1080);
                 panel.setOpaque(false);
 
+                String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTipo\\";
                 String rutaBotones="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\BotonesTipo";
                 //String rutaBotones="C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTipo\\";
 
-                String rutaTexas = rutaBotones+"botonTexas.png";
-                String rutaTexasPress = rutaBotones+"botonTexasPress.png";
+                String rutaTexas = rutaBotones + "botonTexas.png";
+                String rutaTexasPress = rutaBotones + "botonTexasPress.png";
                 JButton botonTexas = crearBoton(rutaTexas, rutaTexasPress);
                 botonTexas.setBounds(200, 150, 500, 800);
                 botonTexas.setFocusPainted(false);
 
-                String ruta5Card = rutaBotones+"boton5Card.png";
-                String ruta5CardPress = rutaBotones+"boton5CardPress.png";
+                String ruta5Card = rutaBotones + "boton5Card.png";
+                String ruta5CardPress = rutaBotones + "boton5CardPress.png";
                 JButton boton5Card = crearBoton(ruta5Card, ruta5CardPress);
                 boton5Card.setBounds(900, 150, 500, 800);
                 boton5Card.setFocusPainted(false);
@@ -113,130 +115,170 @@ public class Main extends JFrame{
                         texas.setLocationRelativeTo(null);
                         texas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         texas.setLayout(null);
+
+                        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadoresTexas.png");
+                        Image imagenAEscalar = pic.getImage().getScaledInstance(1550, 1000, Image.SCALE_SMOOTH);
+                        pic = new ImageIcon(imagenAEscalar);
+                        JLabel image = new JLabel(pic);
+                        image.setBounds(0, 0, 1920, 1080);
+                        texas.add(image);
+                        texas.setContentPane(image);
+
+                        String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+                        int y = 100;
+                        for(int i=2;i<=10;i++) {
+                            String rutaBoton = rutaBotones + "boton" + i + "Jugadores.png";
+                            String rutaBotonPress = rutaBotones + "boton" + i + "JugadoresPress.png";
+                            JButton botonJugadores = crearBoton(rutaBoton, rutaBotonPress);
+                            botonJugadores.setBounds(40, y, 200, 200);
+                            y+=80;
+                            botonJugadores.setFocusPainted(false);
+                            int numero = i;
+                            botonJugadores.addActionListener(new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    TexasHoldEm juego = new TexasHoldEm(numero);
+                                    texas.setVisible(false);
+                                }
+                            });
+                            texas.add(botonJugadores);
+                        }
+
+                        String rutaInformacion = rutaBotones+"botonInformacion.png";
+                        String rutaInformacionPress = rutaBotones+"botonInformacionPress.png";
+                        JButton botonInformacion = crearBoton(rutaInformacion, rutaInformacionPress);
+                        botonInformacion.setBounds(720, 340, 500, 500);
+                        botonInformacion.setFocusPainted(false);
+
+                        botonInformacion.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                JFrame informacion = new JFrame();
+                                informacion.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                                informacion.setUndecorated(true);
+                                informacion.setResizable(false);
+                                informacion.setLocationRelativeTo(null);
+                                informacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                informacion.setLayout(null);
+
+                                ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformaciónTexas.png");
+                                Image imagenAEscalar = pic.getImage().getScaledInstance(1550, 1000, Image.SCALE_SMOOTH);
+                                pic = new ImageIcon(imagenAEscalar);
+                                JLabel image = new JLabel(pic);
+                                image.setBounds(0, 0, 1920, 1080);
+                                informacion.add(image);
+                                informacion.setContentPane(image);
+
+                                String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+
+                                String rutaVolver = rutaBotones+"botonVolver.png";
+                                String rutaVolverPress = rutaBotones+"botonVolverPress.png";
+                                JButton botonVolver = crearBoton(rutaVolver, rutaVolverPress);
+                                botonVolver.setBounds(525, 540, 500, 500);
+                                botonVolver.setFocusPainted(false);
+
+                                botonVolver.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent e) {
+                                        informacion.setVisible(false);
+                                    }
+                                });
+
+                                informacion.add(botonVolver);
+                                informacion.setVisible(true);
+                            }
+                        });
+
+                        texas.add(botonInformacion);
+                        texas.setVisible(true);
+                        jugar.setVisible(false);
                     }
                 });
 
                 boton5Card.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        JFrame Card5 = new JFrame();
-                        Card5.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                        Card5.setUndecorated(true);
-                        Card5.setResizable(false);
-                        Card5.setLocationRelativeTo(null);
-                        Card5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        Card5.setLayout(null);
+                        JFrame card5 = new JFrame();
+                        card5.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        card5.setUndecorated(true);
+                        card5.setResizable(false);
+                        card5.setLocationRelativeTo(null);
+                        card5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        card5.setLayout(null);
+
+                        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadores5Card.png");
+                        Image imagenAEscalar = pic.getImage().getScaledInstance(1550, 1000, Image.SCALE_SMOOTH);
+                        pic = new ImageIcon(imagenAEscalar);
+                        JLabel image = new JLabel(pic);
+                        image.setBounds(0, 0, 1920, 1080);
+                        card5.add(image);
+                        card5.setContentPane(image);
+
+                        String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+                        int y = 180;
+                        for(int i=2;i<=7;i++) {
+                            String rutaBoton = rutaBotones + "boton" + i + "Jugadores.png";
+                            String rutaBotonPress = rutaBotones + "boton" + i + "JugadoresPress.png";
+                            JButton botonJugadores = crearBoton(rutaBoton, rutaBotonPress);
+                            botonJugadores.setBounds(40, y, 200, 200);
+                            y+=90;
+                            botonJugadores.setFocusPainted(false);
+                            int numero = i;
+                            botonJugadores.addActionListener(new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    CardDraw5 juego = new CardDraw5(numero);
+                                    card5.setVisible(false);
+                                }
+                            });
+                            card5.add(botonJugadores);
+                        }
+
+                        String rutaInformacion = rutaBotones+"botonInformacion.png";
+                        String rutaInformacionPress = rutaBotones+"botonInformacionPress.png";
+                        JButton botonInformacion = crearBoton(rutaInformacion, rutaInformacionPress);
+                        botonInformacion.setBounds(720, 340, 500, 500);
+                        botonInformacion.setFocusPainted(false);
+
+                        botonInformacion.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                JFrame informacion = new JFrame();
+                                informacion.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                                informacion.setUndecorated(true);
+                                informacion.setResizable(false);
+                                informacion.setLocationRelativeTo(null);
+                                informacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                informacion.setLayout(null);
+
+                                ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformación5Card.png");
+                                Image imagenAEscalar = pic.getImage().getScaledInstance(1550, 1000, Image.SCALE_SMOOTH);
+                                pic = new ImageIcon(imagenAEscalar);
+                                JLabel image = new JLabel(pic);
+                                image.setBounds(0, 0, 1920, 1080);
+                                informacion.add(image);
+                                informacion.setContentPane(image);
+
+                                String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+
+                                String rutaVolver = rutaBotones+"botonVolver.png";
+                                String rutaVolverPress = rutaBotones+"botonVolverPress.png";
+                                JButton botonVolver = crearBoton(rutaVolver, rutaVolverPress);
+                                botonVolver.setBounds(525, 540, 500, 500);
+                                botonVolver.setFocusPainted(false);
+
+                                botonVolver.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent e) {
+                                        informacion.setVisible(false);
+                                    }
+                                });
+
+                                informacion.add(botonVolver);
+                                informacion.setVisible(true);
+                            }
+                        });
+                        card5.add(botonInformacion);
+                        card5.setVisible(true);
+                        jugar.setVisible(false);
                     }
                 });
-
-//                int numJugadores = 0;
-//                Object[] botones = {"Texas Hold 'em","Otro juego"};
-//                int tipoPoker = JOptionPane.showOptionDialog(ventana,
-//                        "Elige modalidad","Modalidad",
-//                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
-//                        null, botones, botones[0]);
-//                String tipoPokerStr = "";
-//                switch (tipoPoker){
-//                    case 0:
-//                        while (numJugadores<2 || numJugadores>10) {
-//                            String numJugadoresStr = JOptionPane.showInputDialog(ventana,
-//                                    "Número de jugadores", "Jugadores",
-//                                    JOptionPane.QUESTION_MESSAGE);
-//                            try{
-//                                numJugadores = Integer.parseInt(numJugadoresStr);
-//                                if (numJugadores<2 || numJugadores>10) {
-//                                    JOptionPane.showMessageDialog(null,
-//                                            "Solo pueden jugar 2 - 10 jugadores",
-//                                            "Error",JOptionPane.ERROR_MESSAGE);
-//                                }
-//                            }catch (NumberFormatException exception){
-//                                JOptionPane.showMessageDialog(null,"Ingrese un número de jugadores"
-//                                );
-//                            }
-//                        }
-//                        String [] jugadoresJuego1 = new String[numJugadores];
-//                        for(int i = 0; i < numJugadores; i++){
-//                            String nombreJugador = JOptionPane.showInputDialog(ventana,
-//                                    "Ingresa el nombre del jugador "+(i+1),
-//                                    "Nombre del jugador", JOptionPane.QUESTION_MESSAGE);
-//                            jugadoresJuego1[i] = nombreJugador;
-//                        }
-//                        System.out.println(Arrays.toString(jugadoresJuego1));
-//                        JuegoDePoker juego = new TexasHoldEm(numJugadores);
-//                        break;
-//                    case 1:
-//                        while (numJugadores<2 || numJugadores>7) {
-//                            String numJugadoresStr = JOptionPane.showInputDialog(ventana,
-//                                    "Número de jugadores", "Jugadores",
-//                                    JOptionPane.QUESTION_MESSAGE);
-//                            numJugadores = Integer.parseInt(numJugadoresStr);
-//                            if (numJugadores<2 || numJugadores>7) {
-//                                JOptionPane.showMessageDialog(null,
-//                                        "Solo pueden jugar 2 - 7 jugadores",
-//                                        "Error",JOptionPane.ERROR_MESSAGE);
-//                            }
-//                        }
-//                        String [] jugadoresJuego2 = new String[numJugadores];
-//                        for(int i = 0; i < numJugadores; i++){
-//                            String nombreJugador = JOptionPane.showInputDialog(ventana,
-//                                    "Ingresa el nombre del jugador "+(i+1),
-//                                    "Nombre del jugador", JOptionPane.QUESTION_MESSAGE);
-//                            jugadoresJuego2[i] = nombreJugador;
-//                        }
-//                        System.out.println(Arrays.toString(jugadoresJuego2));
-//                        tipoPokerStr = "Otro juego";
-//                        JuegoDePoker cardDraw5 = new CardDraw5(numJugadores);
-//                        break;
-//                }
-
-                ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\pokerPregunta.png");
-                Image preImagen = imagen.getImage();
-                imagen = new ImageIcon(preImagen.getScaledInstance(50,50,Image.SCALE_SMOOTH));
-                int numJugadores = 0;
-                Object[] botones = {"Texas Hold 'em","Otro juego"};
-                int tipoPoker = JOptionPane.showOptionDialog(ventana,
-                        "Elige modalidad","Modalidad",
-                        JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE,
-                        imagen, botones, botones[0]);
-                String tipoPokerStr = "";
-                switch (tipoPoker){
-                    case 0:
-                        while (numJugadores<2 || numJugadores>10) {
-                            String numJugadoresStr = JOptionPane.showInputDialog(ventana,
-                                    "Número de jugadores", "Jugadores",
-                                    JOptionPane.QUESTION_MESSAGE);
-                            try{
-                                numJugadores = Integer.parseInt(numJugadoresStr);
-                                if (numJugadores<2 || numJugadores>10) {
-                                    JOptionPane.showMessageDialog(null,
-                                            "Solo pueden jugar 2 - 10 jugadores",
-                                            "Error",JOptionPane.ERROR_MESSAGE);
-                                }
-                            }catch (NumberFormatException exception){
-                                JOptionPane.showMessageDialog(null,"Ingrese un número de jugadores"
-                                        );
-                            }
-                        }
-
-                        JuegoDePoker juego = new TexasHoldEm(numJugadores,"Texas HoldEm");
-                        break;
-                    case 1:
-                        while (numJugadores<2 || numJugadores>7) {
-                            String numJugadoresStr = JOptionPane.showInputDialog(ventana,
-                                    "Número de jugadores", "Jugadores",
-                                    JOptionPane.QUESTION_MESSAGE);
-                            numJugadores = Integer.parseInt(numJugadoresStr);
-                            if (numJugadores<2 || numJugadores>7) {
-                                JOptionPane.showMessageDialog(null,
-                                        "Solo pueden jugar 2 - 7 jugadores",
-                                        "Error",JOptionPane.ERROR_MESSAGE);
-                            }
-                        }
-                        tipoPokerStr = "Otro juego";
-                        JuegoDePoker cardDraw5 = new CardDraw5(numJugadores,tipoPokerStr);
-                        break;
-                }
             }
         });
+
         creditos.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(ventana, "Realizado por: \n" +
@@ -245,6 +287,7 @@ public class Main extends JFrame{
                         "Créditos", JOptionPane.DEFAULT_OPTION);
             }
         });
+
         salir.addActionListener(new AbstractAction() {
             @Override
             public void actionPerformed(ActionEvent e) {

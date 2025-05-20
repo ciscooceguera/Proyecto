@@ -3,8 +3,8 @@ import javax.swing.border.TitledBorder;
 import java.awt.*;
 
 public class CardDraw5 extends JuegoDePoker {
-    public CardDraw5(int numJugadores, String tipoPoker) {
-        super(numJugadores,tipoPoker);
+    public CardDraw5(int numJugadores) {
+        super(numJugadores);
         iniciarJuego();
     }
 
