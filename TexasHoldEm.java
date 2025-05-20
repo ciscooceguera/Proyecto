@@ -2,7 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
 
 public class TexasHoldEm extends JuegoDePoker {
     private int countRondas = 0;
@@ -63,7 +62,6 @@ public class TexasHoldEm extends JuegoDePoker {
             System.out.println(cartasComunitarias);
         }
     }
-
     public void iniciarCartasComunitarias(){
         cartasComunitarias = mazo.tomarCartas(3);
         ventana.mostrarCartasComunitarias(cartasComunitarias);

@@ -45,9 +45,10 @@ public class Carta implements Comparable {
         }
         return new ImageIcon(path);
     }
+
     // Metodo que retorna la ruta que representa a la carta
     public String obtenerImgRuta(){
-        String path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\";
+        String path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\";
         switch(valor){
             case 11:
                 path += "J"+figura+".png";
@@ -93,18 +94,5 @@ public class Carta implements Comparable {
     public int compareTo(Object o) {
         Carta otraCarta = (Carta) o;
         return valor - otraCarta.valor;
-    }
-    @Override
-    public boolean equals(Object o){
-        Carta otraCarta = (Carta) o;
-        return valor == otraCarta.valor && figura.equals(otraCarta.figura);
-    }
-
-    // borrar metodos, lo puse para probar cosas
-    public void setValor(int valor){
-        this.valor = valor;
-    }
-    public void setFigura(String figura){
-        this.figura = figura;
     }
 }

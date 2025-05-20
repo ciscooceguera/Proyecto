@@ -47,7 +47,6 @@ public class Ventana extends JFrame {
             crearInterfaz5Card();
         }
     }
-
     // inicializa los botones
     public void inicializarComponentes(){
         String rutaDefault = path + "ImageCasino\\BotonesImage\\";
