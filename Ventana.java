@@ -15,14 +15,15 @@ public class Ventana extends JFrame {
     protected JButton carta1,carta2;
     protected JPanel panelDineroJugador,panelPot;
     protected JButton cartaC1, cartaC2, cartaC3, cartaC4, cartaC5;
-    protected JTextArea mensajeTurno;
-    protected JPanel panelMano;
+    protected JTextArea mensajeTurno, dineroJugadores, textManos;
+    protected JPanel panelMano, panelDineroDeJugadores;
     protected JLayeredPane panelMensajeTurno;
-    protected JButton bannerMsg;
+    protected JLayeredPane panelManos;
+    protected JButton bannerMsg, bannerRojo;
     protected JTextArea textDineroJugador, textPot;
     protected JTextArea turno = new JTextArea();
     protected JTextArea dinero = new JTextArea();
-    protected JPanel cartasComunitarias = new JPanel();
+    protected JPanel cartasComunitarias;
     protected JTextArea bote = new JTextArea();
     protected JTextArea informacionJugadores = new JTextArea();
     protected TexasHoldEm juego;
@@ -61,11 +62,17 @@ public class Ventana extends JFrame {
         check = botonCircular(rutaCheck,rutaCheckOnPress);
 
         mensajeTurno = new JTextArea();
+        textManos = new JTextArea();
         textPot = new JTextArea();
         textDineroJugador = new JTextArea();
+        dineroJugadores = new JTextArea();
 
         bannerMsg = crearBotonRectangularBordeado("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\bannerMsg.png",
                 480,240,0);
+
+        bannerRojo = crearBotonRectangularBordeado("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\bannerRojo.png",
+                480,480,0);
+        bannerRojo.setVisible(false);
 
         pilaDeFichas = crearBotonRectangularBordeado("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\pilaDeFichas.png");
         pilaDeFichas.setBounds(700,320,120,120);
@@ -139,11 +146,25 @@ public class Ventana extends JFrame {
         bannerMsg.setBounds(0,0,480,240);
         panelMensajeTurno.add(bannerMsg,Integer.valueOf(0));
 
+        panelManos = new JLayeredPane();
+        panelManos.setOpaque(false);
+        panelManos.setLayout(null);
+        panelManos.setBounds(1500,500,480,480);
+
+        bannerRojo.setBounds(0,0,480,480);
+        panelManos.add(bannerRojo,Integer.valueOf(0));
+
 
         cartasComunitarias = new JPanel();
         cartasComunitarias.setLayout(null);
         cartasComunitarias.setOpaque(false);
         cartasComunitarias.setBounds(550,460,1389,182);
+
+        panelDineroDeJugadores = new JPanel();
+        panelDineroDeJugadores.setLayout(null);
+        panelDineroDeJugadores.setOpaque(false);
+        panelDineroDeJugadores.setBounds(1500,0,400,400);
+
 
         inicializarCuadrosDeTextos();
 
@@ -153,11 +174,13 @@ public class Ventana extends JFrame {
         this.add(panelPot);
         this.add(cartasComunitarias);
         this.add(panelMensajeTurno);
+        this.add(panelManos);
         this.add(panelDineroJugador);
         this.add(fold);
         this.add(raise);
         this.add(call);
         this.add(check);
+        this.add(panelDineroDeJugadores);
         this.add(panelFondo);
         this.add(panelFondo);
         this.setVisible(true);
@@ -238,6 +261,7 @@ public class Ventana extends JFrame {
     }
     // Muestra las cartas comunitarias en la mesa.
     public void mostrarCartasComunitarias(ArrayList<Carta> cartas){
+
         int x = 0;
         int y = 0;
         int anchoCarta = 145;
@@ -253,6 +277,10 @@ public class Ventana extends JFrame {
     }
     // Muestra la mano del jugador
     public void mostrarCartasJugadorTurno(Mano cartas){
+        panelMano.removeAll();
+        panelMano.revalidate();
+        panelMano.repaint();
+
         ArrayList<Carta> cartasArray = cartas.getMano();
         int x = 15;
         int y = 0;
@@ -265,8 +293,11 @@ public class Ventana extends JFrame {
         JButton boton2 = crearBotonRectangularBordeado(cartasArray.get(1).obtenerImgRuta(),anchoCarta,altoCarta,-25);
         boton2.setBounds(x,y,anchoCarta,altoCarta);
 
+
         panelMano.add(boton1);
         panelMano.add(boton2);
+        panelMano.revalidate();
+        panelMano.repaint();
     }
     // Redimensiona una imagen a la escala deseada
     public Image redimensionarImagen(String ruta,int nuevoAncho, int nuevoAlto){
@@ -283,6 +314,13 @@ public class Ventana extends JFrame {
     }
     public void mostrarMensajeTurno(String nombre){
         mensajeTurno.setText(nombre + " Is Thinking...");
+    }
+    public void mostrarManos(ArrayList<Jugador> jugadores){
+        String texto = "";
+        for (Jugador jugador : jugadores){
+            texto += jugador.getNombre() + ": " + jugador.getMano();
+        }
+        textManos.setText(texto);
     }
 
     // inicializa el panel del dinero
@@ -342,6 +380,45 @@ public class Ventana extends JFrame {
         mensajeTurno.setBorder(null);
         mensajeTurno.setEnabled(false);
         panelMensajeTurno.add(mensajeTurno,Integer.valueOf(1));
+
+        textManos.setText("");
+        try {
+            Font cinzelDec = Font.createFont(Font.TRUETYPE_FONT
+                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
+                    .deriveFont(Font.BOLD, 30f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(cinzelDec);
+            textManos.setFont(cinzelDec);
+            textManos.setForeground(Color.WHITE);
+
+        }catch(Exception e){
+        }
+        textManos.setBounds(20,100,480,240);
+        textManos.setVisible(true);
+        textManos.setOpaque(false);
+        textManos.setBorder(null);
+        textManos.setEnabled(false);
+        panelManos.add(textManos,Integer.valueOf(1));
+
+        dineroJugadores.setText("Dinero Jugadores: \n");
+        try {
+            Font cinzelDec = Font.createFont(Font.TRUETYPE_FONT
+                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
+                    .deriveFont(Font.BOLD, 30f);
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(cinzelDec);
+            dineroJugadores.setFont(cinzelDec);
+            dineroJugadores.setForeground(Color.WHITE);
+
+        }catch(Exception e){
+        }
+        dineroJugadores.setBounds(0,0,400,400);
+        dineroJugadores.setVisible(true);
+        dineroJugadores.setOpaque(false);
+        dineroJugadores.setBorder(null);
+        dineroJugadores.setEnabled(false);
+        panelDineroDeJugadores.add(dineroJugadores);
+
     }
     // actualiza el dinero del jugador en el frame
     public void setTextDineroJugador(int dinero){
@@ -357,5 +434,12 @@ public class Ventana extends JFrame {
         check.setEnabled(false);
         raise.setEnabled(false);
         call.setEnabled(false);
+    }
+    public void mostrarDineroDeTodosLosJugadores(ArrayList<Jugador> jugadores){
+        String mensajeDinero = "";
+        for (Jugador jugador : jugadores){
+            mensajeDinero += jugador.getNombre() + ": $" + jugador.getDinero() + "\n";
+        }
+        dineroJugadores.setText(mensajeDinero);
     }
 }

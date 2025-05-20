@@ -1,4 +1,4 @@
-public class Jugador {
+public class Jugador implements Comparable{
     private String nombre;
     private int dinero;
     private Mano mano;
@@ -23,5 +23,10 @@ public class Jugador {
     }
     public void setMano(Mano mano){
         this.mano = mano;
+    }
+    @Override
+    public int compareTo(Object o){
+        Jugador jugador = (Jugador)o;
+        return mano.compareTo(jugador.mano);
     }
 }

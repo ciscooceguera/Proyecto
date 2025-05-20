@@ -1,12 +1,15 @@
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
 
 public class TexasHoldEm extends JuegoDePoker {
     private ArrayList<Carta> cartasComunitarias;
     private Ventana ventana;
     public TexasHoldEm(int numJugadores,String tipoPoker){
         super(numJugadores,tipoPoker);
+        cartasComunitarias = new ArrayList<>();
         iniciarJuego();
     }
     public void iniciarJuego(){
@@ -21,6 +24,10 @@ public class TexasHoldEm extends JuegoDePoker {
         cambiarTurno();
         pagarCiegaGrande();
         cambiarTurno();
+        actualizarDineroPlayers();
+        iniciarCartasComunitarias();
+        ventana.mostrarManos(jugadores);
+
     }
     /*
     public void nuevaRonda(){
@@ -38,11 +45,27 @@ public class TexasHoldEm extends JuegoDePoker {
         cambiarTurno();
         pagarCiegaGrande();
         cambiarTurno();
+
     }
     */
+    public void evaluarGanador(){
 
+    }
+    public void iniciarCartasComunitarias(){
+        cartasComunitarias = mazo.tomarCartas(3);
+        ventana.mostrarCartasComunitarias(cartasComunitarias);
+    }
+    public void agregarCartaComunitaria(){
+        if (cartasComunitarias.size() == 5){
+            evaluarGanador();
+        }else {
+            cartasComunitarias.add(mazo.tomarCarta());
+            ventana.mostrarCartasComunitarias(cartasComunitarias);
+        }
+    }
     public void mostrarManoEnTurno(){
         ventana.mostrarCartasJugadorTurno(jugadores.get(jugadorEnTurno-1).getMano());
+
     }
     // implementa repartirManos() que es abstracto, llena el arraylist de manos de acuerdo al # de jugadores
     @Override
@@ -58,6 +81,7 @@ public class TexasHoldEm extends JuegoDePoker {
     }
     public void mostrarDineroTurnoActual(){
         ventana.setTextDineroJugador(jugadores.get(jugadorEnTurno-1).getDinero());
+        mostrarManoEnTurno();
     }
     public void mostrarMensajeEnBanner(){
         ventana.mostrarMensajeTurno(jugadores.get(jugadorEnTurno-1).getNombre());
@@ -66,18 +90,19 @@ public class TexasHoldEm extends JuegoDePoker {
         int jugadorHizoFold = 1;
         while (jugadorHizoFold == 1) {
             jugadorEnTurno = jugadorEnTurno % numJugadores + 1;
-            if (!foldJugadores.contains(jugadorEnTurno)) {
+            if (!foldJugadores.contains(jugadorEnTurno-1)) {
                 jugadorHizoFold=0;
             }else if (evaluarJugadorSinDinero()){
-                jugadores.remove(jugadorEnTurno);
+                jugadores.remove(jugadorEnTurno-1);
             }
         }
         mostrarDineroTurnoActual();
         mostrarDineroEnElBote();
         mostrarMensajeEnBanner();
-        if (verificarNumJugadoresRestantes()==1){
+        if (verificarNumJugadoresRestantes()==1 || (cartasComunitarias.size()==5 && jugadorEnTurno == 1)){
             finRonda();
         }
+        actualizarDineroPlayers();
     }
     public boolean evaluarJugadorSinDinero(){
         if (jugadores.get(jugadorEnTurno-1).getDinero() == 0){
@@ -86,8 +111,24 @@ public class TexasHoldEm extends JuegoDePoker {
         return false;
     }
     public void finRonda(){
-        JOptionPane.showMessageDialog(null,"Ganador ronda: " + jugadores.get(jugadorEnTurno-1).getNombre());
-        //nuevaRonda();
+        int posicionGanador = 0;
+        if (verificarNumJugadoresRestantes()==1) {
+            for (int i = 0; i < numJugadores; i++) {
+                if (!foldJugadores.contains(i)) {
+                    JOptionPane.showMessageDialog(null,"Ganador ronda: " + jugadores.get(posicionGanador).getNombre());
+                }
+            }
+        }else{
+            ArrayList<Jugador> posiblesGanadores = new ArrayList<>();
+            for (int i = 0; i < numJugadores; i++) {
+                if (!foldJugadores.contains(i)) {
+                    posiblesGanadores.add(jugadores.get(i));
+                }
+            }
+            Jugador ganador = Collections.max(posiblesGanadores);
+            JOptionPane.showMessageDialog(null,"Ganador juego: " + ganador.getNombre());
+
+        }
     }
     public void finDelJuego(){
         JOptionPane.showMessageDialog(null,"Ganador juego: " + jugadores.get(jugadorEnTurno-1).getNombre());
@@ -141,10 +182,13 @@ public class TexasHoldEm extends JuegoDePoker {
         apuestaMasGrande=dineroApostado;
         ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\apuestaImagen.png");
         Image imagenAEscalar = imagen.getImage();
-        JOptionPane.showMessageDialog(null,
+       /* JOptionPane.showMessageDialog(null,
                 "Jugador "+jugadorEnTurno+" ha apostado +"+apuestaMasGrande+"!",
                 "Anuncio de Apuesta",JOptionPane.INFORMATION_MESSAGE,
-                imagen);
+                imagen);*/
+        cambiarTurno();
+        verificarSiYaTodosDecidieronAcciones();
+
     }
     public void callear(){
         Jugador jugador = jugadores.get(jugadorEnTurno-1);
@@ -155,17 +199,32 @@ public class TexasHoldEm extends JuegoDePoker {
         ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\callImagen.png");
         Image imagenAEscalar = imagen.getImage();
         imagen = new ImageIcon(imagenAEscalar.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        JOptionPane.showMessageDialog(null,
+        /*JOptionPane.showMessageDialog(null,
                 "Jugador "+jugadorEnTurno+" ha apostado +"+apuestaMasGrande+"!",
                 "Anuncio de Call",JOptionPane.INFORMATION_MESSAGE,
-                imagen);
+                imagen);*/
+        cambiarTurno();
+        verificarSiYaTodosDecidieronAcciones();
+
     }
     public void foldear(){
         foldJugadores.add(jugadorEnTurno-1);
         cambiarTurno();
+        verificarSiYaTodosDecidieronAcciones();
     }
     public void check(){
+        cambiarTurno();
+        verificarSiYaTodosDecidieronAcciones();
 
     }
+    public void verificarSiYaTodosDecidieronAcciones(){
+        if (jugadorEnTurno-1 == 0){
+            agregarCartaComunitaria();
+        }
+    }
+    public void actualizarDineroPlayers(){
+        ventana.mostrarDineroDeTodosLosJugadores(jugadores);
+    }
+
 
 }
