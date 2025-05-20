@@ -168,8 +168,6 @@ public class Ventana extends JFrame {
 
         inicializarCuadrosDeTextos();
 
-
-
         this.add(panelMano);
         this.add(panelPot);
         this.add(cartasComunitarias);
@@ -324,9 +322,10 @@ public class Ventana extends JFrame {
     }
 
     // muestra el dinero del jugador
-    public void mostrarDineroJugador(int dinero){
-        textDineroJugador.setText("$"+dinero);
-    // inicializa el panel del dinero
+    public void mostrarDineroJugador(int dinero) {
+        textDineroJugador.setText("$" + dinero);
+        // inicializa el panel del dinero
+    }
     public void inicializarCuadrosDeTextos(){
         textDineroJugador.setText("$");
         try {

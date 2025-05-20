@@ -7,8 +7,8 @@ import java.util.HashMap;
 public class TexasHoldEm extends JuegoDePoker {
     private ArrayList<Carta> cartasComunitarias;
     private Ventana ventana;
-    public TexasHoldEm(int numJugadores,String tipoPoker){
-        super(numJugadores,tipoPoker);
+    public TexasHoldEm(int numJugadores){
+        super(numJugadores);
         cartasComunitarias = new ArrayList<>();
         iniciarJuego();
     }
