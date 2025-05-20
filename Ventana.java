@@ -323,6 +323,9 @@ public class Ventana extends JFrame {
         textManos.setText(texto);
     }
 
+    // muestra el dinero del jugador
+    public void mostrarDineroJugador(int dinero){
+        textDineroJugador.setText("$"+dinero);
     // inicializa el panel del dinero
     public void inicializarCuadrosDeTextos(){
         textDineroJugador.setText("$");
