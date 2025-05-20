@@ -72,7 +72,9 @@ public class TexasHoldEm extends JuegoDePoker {
       if (!(cartasComunitarias.size() == 5)){
             cartasComunitarias.add(mazo.tomarCarta());
             ventana.mostrarCartasComunitarias(cartasComunitarias);
-        }
+        }else{
+          finRonda();
+      }
     }
     public void mostrarManoEnTurno(){
         ventana.mostrarCartasJugadorTurno(jugadores.get(jugadorEnTurno-1).getMano());
@@ -107,10 +109,10 @@ public class TexasHoldEm extends JuegoDePoker {
         mostrarDineroTurnoActual();
         mostrarDineroEnElBote();
         mostrarMensajeEnBanner();
-        if (verificarNumJugadoresRestantes()==1 || (cartasComunitarias.size()==5 && jugadorEnTurno == 1)
+      /*  if (verificarNumJugadoresRestantes()==1 || (cartasComunitarias.size()==5 && jugadorEnTurno == 1)
                 && countCalls == jugadores.size() - foldJugadores.size()){
             finRonda();
-        }
+        }*/
         actualizarDineroPlayers();
     }
     public void evaluarJugadorSinDinero(){
@@ -265,7 +267,6 @@ public class TexasHoldEm extends JuegoDePoker {
     public void check(){
         cambiarTurno();
         verificarSiYaTodosDecidieronAcciones();
-
     }
     public void  verificarSiYaTodosDecidieronAcciones(){
         if (jugadorEnTurno-1 == 0){

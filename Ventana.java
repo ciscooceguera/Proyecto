@@ -15,20 +15,14 @@ public class Ventana extends JFrame {
     protected JButton raise;
     protected JButton pilaDeFichas;
     protected JButton call;
-    protected JButton carta1,carta2;
     protected JPanel panelDineroJugador,panelPot;
-    protected JButton cartaC1, cartaC2, cartaC3, cartaC4, cartaC5;
     protected JTextArea mensajeTurno, dineroJugadores, textManos;
     protected JPanel panelMano, panelDineroDeJugadores;
     protected JLayeredPane panelMensajeTurno;
     protected JLayeredPane panelManos;
     protected JButton bannerMsg, bannerRojo;
     protected JTextArea textDineroJugador, textPot;
-    protected JTextArea turno = new JTextArea();
-    protected JTextArea dinero = new JTextArea();
     protected JPanel cartasComunitarias;
-    protected JTextArea bote = new JTextArea();
-    protected JTextArea informacionJugadores = new JTextArea();
     protected TexasHoldEm juego;
     protected CardDraw5 juegoCard;
     // constructor de la ventana
@@ -45,7 +39,9 @@ public class Ventana extends JFrame {
             super.setTitle(tipoPoker);
             crearInterfazTexas();
         }else if(tipoPoker.equals("Card Draw 5")){
+            juegoCard = (CardDraw5) juegoDePoker;
             super.setTitle("Card Draw 5");
+            crearInterfaz5Card();
         }
     }
 
@@ -82,7 +78,107 @@ public class Ventana extends JFrame {
         pilaDeFichas.setBounds(700,320,120,120);
         this.add(pilaDeFichas);
     }
+    // crea la interfaz para el 5 card draw
+    public void crearInterfaz5Card(){
+        JPanel panelFondo = new JPanel(){
+            @Override
+            protected void paintComponent(Graphics g){
+                super.paintComponent(g);
+                Image fondo = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\mesaPokerRoja.png").getImage();
+                g.drawImage(fondo, 0, 0, 1920, 1080, this);
+            }
+        };
+        panelFondo.setBounds(0, 0, 1920, 1080);
 
+        int tamanoFichas = 150;
+        int posicionXFichasBotones = 50;
+        int posicionYFichasBotones = 530;
+        int incrementosEnY = 25+tamanoFichas;
+        fold.setBounds(posicionXFichasBotones, posicionYFichasBotones, tamanoFichas, tamanoFichas);
+        call.setBounds(posicionXFichasBotones, posicionYFichasBotones + incrementosEnY, tamanoFichas, tamanoFichas);
+        raise.setBounds(posicionXFichasBotones, posicionYFichasBotones + incrementosEnY*2, tamanoFichas, tamanoFichas);
+        check.setBounds(posicionXFichasBotones, posicionYFichasBotones + incrementosEnY, tamanoFichas, tamanoFichas);
+        check.setVisible(false);
+
+
+
+        fold.addActionListener(e ->{
+            juego.foldear();
+        });
+
+        call.addActionListener(e -> {
+            juego.callear();
+        });
+
+        raise.addActionListener(e -> {
+            juego.subir();
+        });
+
+        check.addActionListener(e -> {
+            juego.check();
+        });
+
+        int x = 760;
+        int y = 720;
+        int anchoCarta = 210;
+        int altoCarta = 263;
+
+        panelMano = new JPanel();
+        panelMano.setLayout(null);
+        panelMano.setOpaque(false);
+        panelMano.setBounds(550,460,1389,182);
+
+        panelDineroJugador = new JPanel();
+        panelDineroJugador.setLayout(null);
+        panelDineroJugador.setOpaque(false);
+        panelDineroJugador.setBounds(1550,850,450,350);
+
+        panelPot = new JPanel();
+        panelPot.setOpaque(false);
+        panelPot.setLayout(null);
+        panelPot.setBounds(850,340,450,350);
+
+        panelMensajeTurno = new JLayeredPane();
+        panelMensajeTurno.setLayout(null);
+        panelMensajeTurno.setOpaque(false);
+        panelMensajeTurno.setBounds(0,50,480,240);
+
+        bannerMsg.setBounds(0,0,480,240);
+        panelMensajeTurno.add(bannerMsg,Integer.valueOf(0));
+
+        panelManos = new JLayeredPane();
+        panelManos.setOpaque(false);
+        panelManos.setLayout(null);
+        panelManos.setBounds(1500,500,480,480);
+
+        bannerRojo.setBounds(0,0,480,480);
+        panelManos.add(bannerRojo,Integer.valueOf(0));
+
+
+
+
+        panelDineroDeJugadores = new JPanel();
+        panelDineroDeJugadores.setLayout(null);
+        panelDineroDeJugadores.setOpaque(false);
+        panelDineroDeJugadores.setBounds(1500,0,400,400);
+
+
+        inicializarCuadrosDeTextos();
+
+        this.add(panelMano);
+        this.add(panelPot);
+        this.add(panelMensajeTurno);
+        this.add(panelManos);
+        this.add(panelDineroJugador);
+        this.add(fold);
+        this.add(raise);
+        this.add(call);
+        this.add(check);
+        this.add(panelDineroDeJugadores);
+        this.add(panelFondo);
+        this.add(panelFondo);
+        this.setVisible(true);
+    }
     // crea la interfaz para el texas hold 'em
     public void crearInterfazTexas(){
         JPanel panelFondo = new JPanel(){
@@ -262,7 +358,39 @@ public class Ventana extends JFrame {
         boton.setOpaque(false);
         return boton;
     }
+    public void reiniciarManoFrame(){
+        //this.remove(cartasComunitarias);
+        System.out.println("Componentes antes del rem: " + cartasComunitarias.getComponentCount());
+        System.out.println("Componentes despues del remove: " + cartasComunitarias.getComponentCount());
+        //this.add(cartasComunitarias);
+        panelMano.removeAll();
+        panelMano.revalidate();
+        panelMano.repaint();
 
+        this.revalidate();
+        this.repaint();
+    }
+    // Muestra las cartas comunitarias en la mesa.
+    public void mostrarManoFrame(ArrayList<Carta> cartas){
+        System.out.println(cartas);
+        panelMano.revalidate();
+        panelMano.repaint();
+        int x = 0;
+        int y = 0;
+        int anchoCarta = 145;
+        int altoCarta = 181;
+        int xIncrementos = 166;
+        for (Carta c : cartas){
+            JButton botonCarta = crearBotonRectangularBordeado(c.obtenerImgRuta());
+            botonCarta.setBounds(x,y,anchoCarta,altoCarta);
+            x+=xIncrementos;
+            panelMano.add(botonCarta);
+        }
+        panelMano.revalidate();
+        panelMano.repaint();
+        this.revalidate();
+        this.repaint();
+    }
 
     public void reiniciarCartasComunitarias(){
         //this.remove(cartasComunitarias);
@@ -278,7 +406,6 @@ public class Ventana extends JFrame {
         this.revalidate();
         this.repaint();
     }
-
     // Muestra las cartas comunitarias en la mesa.
     public void mostrarCartasComunitarias(ArrayList<Carta> cartas){
         System.out.println(cartas);
