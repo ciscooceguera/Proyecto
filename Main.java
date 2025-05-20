@@ -187,13 +187,86 @@ public class Main extends JFrame{
 
                 boton5Card.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent e) {
-                        JFrame Card5 = new JFrame();
-                        Card5.setExtendedState(JFrame.MAXIMIZED_BOTH);
-                        Card5.setUndecorated(true);
-                        Card5.setResizable(false);
-                        Card5.setLocationRelativeTo(null);
-                        Card5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        Card5.setLayout(null);
+                        JFrame card5 = new JFrame();
+                        card5.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                        card5.setUndecorated(true);
+                        card5.setResizable(false);
+                        card5.setLocationRelativeTo(null);
+                        card5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                        card5.setLayout(null);
+
+                        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadores5Card.png");
+                        Image imagenAEscalar = pic.getImage().getScaledInstance(1550, 1000, Image.SCALE_SMOOTH);
+                        pic = new ImageIcon(imagenAEscalar);
+                        JLabel image = new JLabel(pic);
+                        image.setBounds(0, 0, 1920, 1080);
+                        card5.add(image);
+                        card5.setContentPane(image);
+
+                        String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+                        int y = 180;
+                        for(int i=2;i<=7;i++) {
+                            String rutaBoton = rutaBotones + "boton" + i + "Jugadores.png";
+                            String rutaBotonPress = rutaBotones + "boton" + i + "JugadoresPress.png";
+                            JButton botonJugadores = crearBoton(rutaBoton, rutaBotonPress);
+                            botonJugadores.setBounds(40, y, 200, 200);
+                            y+=90;
+                            botonJugadores.setFocusPainted(false);
+                            int numero = i;
+                            botonJugadores.addActionListener(new ActionListener() {
+                                public void actionPerformed(ActionEvent e) {
+                                    CardDraw5 juego = new CardDraw5(numero);
+                                    card5.setVisible(false);
+                                }
+                            });
+                            card5.add(botonJugadores);
+                        }
+
+                        String rutaInformacion = rutaBotones+"botonInformacion.png";
+                        String rutaInformacionPress = rutaBotones+"botonInformacionPress.png";
+                        JButton botonInformacion = crearBoton(rutaInformacion, rutaInformacionPress);
+                        botonInformacion.setBounds(720, 340, 500, 500);
+                        botonInformacion.setFocusPainted(false);
+
+                        botonInformacion.addActionListener(new ActionListener() {
+                            public void actionPerformed(ActionEvent e) {
+                                JFrame informacion = new JFrame();
+                                informacion.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                                informacion.setUndecorated(true);
+                                informacion.setResizable(false);
+                                informacion.setLocationRelativeTo(null);
+                                informacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                                informacion.setLayout(null);
+
+                                ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformación5Card.png");
+                                Image imagenAEscalar = pic.getImage().getScaledInstance(1550, 1000, Image.SCALE_SMOOTH);
+                                pic = new ImageIcon(imagenAEscalar);
+                                JLabel image = new JLabel(pic);
+                                image.setBounds(0, 0, 1920, 1080);
+                                informacion.add(image);
+                                informacion.setContentPane(image);
+
+                                String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTexas\\";
+
+                                String rutaVolver = rutaBotones+"botonVolver.png";
+                                String rutaVolverPress = rutaBotones+"botonVolverPress.png";
+                                JButton botonVolver = crearBoton(rutaVolver, rutaVolverPress);
+                                botonVolver.setBounds(525, 540, 500, 500);
+                                botonVolver.setFocusPainted(false);
+
+                                botonVolver.addActionListener(new ActionListener() {
+                                    public void actionPerformed(ActionEvent e) {
+                                        informacion.setVisible(false);
+                                    }
+                                });
+
+                                informacion.add(botonVolver);
+                                informacion.setVisible(true);
+                            }
+                        });
+                        card5.add(botonInformacion);
+                        card5.setVisible(true);
+                        jugar.setVisible(false);
                     }
                 });
             }
