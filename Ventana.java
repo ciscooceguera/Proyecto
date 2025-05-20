@@ -47,7 +47,6 @@ public class Ventana extends JFrame {
             crearInterfaz5Card();
         }
     }
-
     // inicializa los botones
     public void inicializarComponentes(){
         String rutaDefault = path + "ImageCasino\\BotonesImage\\";
@@ -66,20 +65,16 @@ public class Ventana extends JFrame {
         call = botonCircular(rutaCall,rutaCallOnPress);
         check = botonCircular(rutaCheck,rutaCheckOnPress);
         descartar = botonCircular(rutaDescartar,rutaDescartarOnPress);
-
         mensajeTurno = new JTextArea();
         textManos = new JTextArea();
         textPot = new JTextArea();
         textDineroJugador = new JTextArea();
         dineroJugadores = new JTextArea();
-
         bannerMsg = crearBotonRectangularBordeado(path+"ImageCasino\\bannerMsg.png",
                 480,240,0);
-
         bannerRojo = crearBotonRectangularBordeado(path + "ImageCasino\\bannerRojo.png",
                 480,480,0);
         bannerRojo.setVisible(false);
-
         pilaDeFichas = crearBotonRectangularBordeado(path + "ImageCasino\\pilaDeFichas.png");
         pilaDeFichas.setBounds(700,320,120,120);
         this.add(pilaDeFichas);
@@ -96,7 +91,6 @@ public class Ventana extends JFrame {
             }
         };
         panelFondo.setBounds(0, 0, 1920, 1080);
-
         int tamanoFichas = 150;
         int posicionXFichasBotones = 50;
         int posicionYFichasBotones = 530;
@@ -108,79 +102,54 @@ public class Ventana extends JFrame {
         descartar.setBounds(885,885,tamanoFichas,tamanoFichas);
         descartar.setVisible(false);
         check.setVisible(false);
-
-
-
-
         fold.addActionListener(e ->{
             juegoCard.foldear();
         });
-
         call.addActionListener(e -> {
             juegoCard.callear();
         });
-
         raise.addActionListener(e -> {
             juegoCard.subir();
         });
-
         check.addActionListener(e -> {
             juegoCard.check();
         });
-
         descartar.addActionListener(e -> {
             juegoCard.descartar(cartas);
         });
-
         int x = 760;
         int y = 720;
         int anchoCarta = 210;
         int altoCarta = 263;
-
         panelMano = new JPanel();
         panelMano.setLayout(null);
         panelMano.setOpaque(false);
         panelMano.setBounds(550,450,1389,182);
-
-
         panelDineroJugador = new JPanel();
         panelDineroJugador.setLayout(null);
         panelDineroJugador.setOpaque(false);
         panelDineroJugador.setBounds(1550,850,450,350);
-
         panelPot = new JPanel();
         panelPot.setOpaque(false);
         panelPot.setLayout(null);
         panelPot.setBounds(850,340,450,350);
-
         panelMensajeTurno = new JLayeredPane();
         panelMensajeTurno.setLayout(null);
         panelMensajeTurno.setOpaque(false);
         panelMensajeTurno.setBounds(0,50,480,240);
-
         bannerMsg.setBounds(0,0,480,240);
         panelMensajeTurno.add(bannerMsg,Integer.valueOf(0));
-
         panelManos = new JLayeredPane();
         panelManos.setOpaque(false);
         panelManos.setLayout(null);
         panelManos.setBounds(1500,400,600,600);
-
         bannerRojo.setBounds(0,0,480,480);
         panelManos.add(bannerRojo,Integer.valueOf(0));
-
-
-
-
         panelDineroDeJugadores = new JPanel();
         panelDineroDeJugadores.setLayout(null);
         panelDineroDeJugadores.setOpaque(false);
         panelDineroDeJugadores.setBounds(1500,0,400,400);
-
-
         inicializarCuadrosDeTextos();
-
-
         this.add(panelMano);
         this.add(panelPot);
         this.add(panelMensajeTurno);
@@ -207,7 +176,6 @@ public class Ventana extends JFrame {
             }
         };
         panelFondo.setBounds(0, 0, 1920, 1080);
-
         int tamanoFichas = 150;
         int posicionXFichasBotones = 50;
         int posicionYFichasBotones = 530;
@@ -217,75 +185,55 @@ public class Ventana extends JFrame {
         raise.setBounds(posicionXFichasBotones, posicionYFichasBotones + incrementosEnY*2, tamanoFichas, tamanoFichas);
         check.setBounds(posicionXFichasBotones, posicionYFichasBotones + incrementosEnY, tamanoFichas, tamanoFichas);
         check.setVisible(false);
-
-
-
         fold.addActionListener(e ->{
             juego.foldear();
         });
-
         call.addActionListener(e -> {
             juego.callear();
         });
-
         raise.addActionListener(e -> {
             juego.subir();
         });
-
         check.addActionListener(e -> {
             juego.check();
         });
-
         int x = 760;
         int y = 720;
         int anchoCarta = 210;
         int altoCarta = 263;
-
         panelMano = new JPanel();
         panelMano.setLayout(null);
         panelMano.setOpaque(false);
         panelMano.setBounds(x, y, anchoCarta*2 +50, altoCarta+50);
-
         panelDineroJugador = new JPanel();
         panelDineroJugador.setLayout(null);
         panelDineroJugador.setOpaque(false);
         panelDineroJugador.setBounds(1550,850,450,350);
-
         panelPot = new JPanel();
         panelPot.setOpaque(false);
         panelPot.setLayout(null);
         panelPot.setBounds(850,340,450,350);
-
         panelMensajeTurno = new JLayeredPane();
         panelMensajeTurno.setLayout(null);
         panelMensajeTurno.setOpaque(false);
         panelMensajeTurno.setBounds(0,50,480,240);
-
         bannerMsg.setBounds(0,0,480,240);
         panelMensajeTurno.add(bannerMsg,Integer.valueOf(0));
-
         panelManos = new JLayeredPane();
         panelManos.setOpaque(false);
         panelManos.setLayout(null);
         panelManos.setBounds(1500,500,480,480);
-
         bannerRojo.setBounds(0,0,480,480);
         panelManos.add(bannerRojo,Integer.valueOf(0));
-
-
         cartasComunitarias = new JPanel();
         cartasComunitarias.setLayout(null);
         cartasComunitarias.setOpaque(false);
         cartasComunitarias.setBounds(550,460,1389,182);
-
         panelDineroDeJugadores = new JPanel();
         panelDineroDeJugadores.setLayout(null);
         panelDineroDeJugadores.setOpaque(false);
         panelDineroDeJugadores.setBounds(1500,0,400,400);
-
-
         inicializarCuadrosDeTextos();
-
         this.add(panelMano);
         this.add(panelPot);
         this.add(cartasComunitarias);
@@ -362,7 +310,6 @@ public class Ventana extends JFrame {
             protected void paintComponent(Graphics g){
                 Graphics2D g2d = (Graphics2D) g.create();
                 g2d.rotate(Math.toRadians(angulo), getWidth()/2, getHeight()/2);
-
                 Shape clip = new RoundRectangle2D.Float(0,0,getWidth(),getHeight(),10,10);
                 g2d.setClip(clip);
                 g2d.drawImage(imagen,0,0,getWidth(),getHeight(),this);
@@ -375,22 +322,16 @@ public class Ventana extends JFrame {
         boton.setOpaque(false);
         return boton;
     }
+    // Reinicia la mano en el frame
     public void reiniciarManoFrame(){
-        //this.remove(cartasComunitarias);
-
-
-
-        //this.add(cartasComunitarias);
         panelMano.removeAll();
         panelMano.revalidate();
         panelMano.repaint();
-
         this.revalidate();
         this.repaint();
     }
-
     // Muestra las cartas comunitarias en la mesa.
-    public void mostrarManoFrame(ArrayList<Carta> cartas, int countDescarte){
+    public void mostrarManoFrame(ArrayList<Carta> cartas, int countDescarte, int numJugadores){
         System.out.println(cartas);
         panelMano.revalidate();
         panelMano.repaint();
@@ -408,7 +349,7 @@ public class Ventana extends JFrame {
             botonCarta.setOpaque(false);
             botonCarta.setBounds(x,y,anchoCarta,altoCarta);
             botonCarta.setEnabled(true);
-            if (countDescarte <2) {
+            if (countDescarte <numJugadores) {
                 botonCarta.addActionListener(e -> {
                     if (cartas.contains(c)) {
                         cartas.remove(c);
@@ -428,18 +369,13 @@ public class Ventana extends JFrame {
         this.revalidate();
         this.repaint();
     }
-
+    // Reinicia la cartas comunitarias en el frame
     public void reiniciarCartasComunitarias(){
-        //this.remove(cartasComunitarias);
-
         System.out.println("Componentes antes del rem: " + cartasComunitarias.getComponentCount());
         System.out.println("Componentes despues del remove: " + cartasComunitarias.getComponentCount());
-
-        //this.add(cartasComunitarias);
         cartasComunitarias.removeAll();
         cartasComunitarias.revalidate();
         cartasComunitarias.repaint();
-
         this.revalidate();
         this.repaint();
     }
@@ -464,10 +400,12 @@ public class Ventana extends JFrame {
         this.revalidate();
         this.repaint();
     }
+    // Vuelve enable el botón call, y disable el botón check
     public void switchCallPorCheck(){
         call.setVisible(false);
         check.setVisible(true);
     }
+    // Vuelve enable el botón check, y disable el botón call
     public void switchCheckPorCall(){
         check.setVisible(false);
         call.setVisible(true);
@@ -477,7 +415,6 @@ public class Ventana extends JFrame {
         panelMano.removeAll();
         panelMano.revalidate();
         panelMano.repaint();
-
         ArrayList<Carta> cartasArray = cartas.getMano();
         int x = 15;
         int y = 0;
@@ -489,8 +426,6 @@ public class Ventana extends JFrame {
         x=15;
         JButton boton2 = crearBotonRectangularBordeado(cartasArray.get(1).obtenerImgRuta(),anchoCarta,altoCarta,-25);
         boton2.setBounds(x,y,anchoCarta,altoCarta);
-
-
         panelMano.add(boton1);
         panelMano.add(boton2);
         panelMano.revalidate();
@@ -504,28 +439,20 @@ public class Ventana extends JFrame {
         g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BICUBIC);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-
         g2d.drawImage(imagen, 0, 0, nuevoAncho, nuevoAlto, null);
         g2d.dispose();
         return imagenRedimensionada;
     }
+    // Muestra un mensaje en el JFrame del turno actual
     public void mostrarMensajeTurno(String nombre){
         mensajeTurno.setText(nombre + " Is Thinking...");
     }
-    public void mostrarManos(ArrayList<Jugador> jugadores){
-        String texto = "";
-        for (Jugador jugador : jugadores){
-            texto += jugador.getNombre() + ": " + jugador.getMano();
-        }
-        textManos.setText(texto);
-    }
-
-    // muestra el dinero del jugador
+    // Muestra el dinero del jugador
     public void mostrarDineroJugador(int dinero) {
         textDineroJugador.setText("$" + dinero);
 
     }
-    // inicializa el panel del dinero
+    // Inicializa el panel del dinero
     public void inicializarCuadrosDeTextos(){
         textDineroJugador.setText("$");
         try {
@@ -622,15 +549,15 @@ public class Ventana extends JFrame {
         panelDineroDeJugadores.add(dineroJugadores);
 
     }
-    // actualiza el dinero del jugador en el frame
+    // Actualiza el dinero del jugador en el frame
     public void setTextDineroJugador(int dinero){
         textDineroJugador.setText("S" + String.valueOf(dinero));
     }
-    // muestra el dinero en el pot
+    // Muestra el dinero en el pot
     public void mostrarPot(int pot){
         textPot.setText("$"+pot);
     }
-    // desactivar los botones
+    // Desactivar los botones
     public void endGame(){
         fold.setEnabled(false);
         check.setEnabled(false);
@@ -641,13 +568,11 @@ public class Ventana extends JFrame {
         botonSalir.setVisible(true);
         botonSalir.setEnabled(true);
         botonSalir.setOpaque(false);
-
         textManos.setText("");
         textPot.setText("");
         textDineroJugador.setText("");
         dineroJugadores.setText("");
         mensajeTurno.setText("");
-
         JPanel salirPanel = new JPanel();
         salirPanel.setLayout(null);
         salirPanel.setBounds(1500,500,200,200);
@@ -656,14 +581,13 @@ public class Ventana extends JFrame {
             this.dispose();
         });
         salirPanel.add(botonSalir);
-
         this.add(salirPanel);
-
         this.revalidate();
         this.repaint();
     }
+    // Muestra el dinero que contienen todos los jugadores enlistados
     public void mostrarDineroDeTodosLosJugadores(ArrayList<Jugador> jugadores){
-        String mensajeDinero = "";
+        String mensajeDinero = "Dinero Jugadores: \n";
         for (Jugador jugador : jugadores){
             mensajeDinero += jugador.getNombre() + ": $" + jugador.getDinero() + "\n";
         }

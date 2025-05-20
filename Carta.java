@@ -24,27 +24,7 @@ public class Carta implements Comparable {
                 break;
         }
     }
-    // Metodo que retorna la imagen que representa a la carta
-    public Icon obtenerIcono(){
-        String path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\";
-        switch(valor){
-            case 11:
-                path += "J"+figura+".png";
-                break;
-            case 12:
-                path += "Q"+figura+".png";
-                break;
-            case 13:
-                path += "K"+figura+".png";
-                break;
-            case 14:
-                path = "A"+figura+".png";
-                break;
-            default:
-                path = valor+figura+".png";
-        }
-        return new ImageIcon(path);
-    }
+
     // Metodo que retorna la ruta que representa a la carta
     public String obtenerImgRuta(){
         String path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\";
@@ -98,13 +78,5 @@ public class Carta implements Comparable {
     public boolean equals(Object o){
         Carta otraCarta = (Carta) o;
         return valor == otraCarta.valor && figura.equals(otraCarta.figura);
-    }
-
-    // borrar metodos, lo puse para probar cosas
-    public void setValor(int valor){
-        this.valor = valor;
-    }
-    public void setFigura(String figura){
-        this.figura = figura;
     }
 }

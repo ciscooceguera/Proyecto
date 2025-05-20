@@ -2,8 +2,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.HashMap;
-
 public class TexasHoldEm extends JuegoDePoker {
     private int countRondas = 0;
     private int countCalls = 0;
@@ -14,6 +12,7 @@ public class TexasHoldEm extends JuegoDePoker {
         cartasComunitarias = new ArrayList<>();
         iniciarJuego();
     }
+    // Controlar el flujo del juego
     public void iniciarJuego(){
         ventana = new Ventana("Texas HoldEm",this);
         ventana.setVisible(true);
@@ -28,8 +27,8 @@ public class TexasHoldEm extends JuegoDePoker {
         cambiarTurno();
         actualizarDineroPlayers();
         iniciarCartasComunitarias();
-        ventana.mostrarManos(jugadores);
     }
+    // Se encarga de reiniciar los componentes en caso de que haya concluido una ronda del juego
     public void nuevaRonda(){
         jugadores.getLast().incrementarDinero(boteInt);
         evaluarJugadorSinDinero();
@@ -59,15 +58,15 @@ public class TexasHoldEm extends JuegoDePoker {
             cambiarTurno();
             actualizarDineroPlayers();
             iniciarCartasComunitarias();
-            ventana.mostrarManos(jugadores);
             System.out.println(cartasComunitarias);
         }
     }
-
+    // Se encarga de inicializar las cartas comunitarias del juego (3 cartas)
     public void iniciarCartasComunitarias(){
         cartasComunitarias = mazo.tomarCartas(3);
         ventana.mostrarCartasComunitarias(cartasComunitarias);
     }
+    // Añade exclusivamente una sola carta al ArrayList de cartas comunitarias
     public void agregarCartaComunitaria(){
       if (!(cartasComunitarias.size() == 5)){
             cartasComunitarias.add(mazo.tomarCarta());
@@ -76,10 +75,11 @@ public class TexasHoldEm extends JuegoDePoker {
           finRonda();
       }
     }
+    // Muestra en el JFrame la mano contenido del jugador en turno actual
     public void mostrarManoEnTurno(){
         ventana.mostrarCartasJugadorTurno(jugadores.get(jugadorEnTurno-1).getMano());
     }
-    // implementa repartirManos() que es abstracto, llena el arraylist de manos de acuerdo al # de jugadores
+    // Implementa repartirManos() que es abstracto, llena el arraylist de manos de acuerdo al # de jugadores
     @Override
     public void repartirManos(){
         for (int i = 0; i < jugadores.size(); i++){
@@ -88,16 +88,20 @@ public class TexasHoldEm extends JuegoDePoker {
            jugadores.set(i, jugador);
         }
     }
+    // Actualiza el dinero total contenido en el pot, en el JFrame
     public void mostrarDineroEnElBote(){
         ventana.mostrarPot(boteInt);
     }
+    // Actualiza el dinero total del jugador en turno actual, en el JFrame
     public void mostrarDineroTurnoActual(){
         ventana.setTextDineroJugador(jugadores.get(jugadorEnTurno-1).getDinero());
         mostrarManoEnTurno();
     }
+    // Actualiza un mensaje en el JFrame que representa el turno del jugador actual
     public void mostrarMensajeEnBanner(){
         ventana.mostrarMensajeTurno(jugadores.get(jugadorEnTurno-1).getNombre());
     }
+    // Se encarga de gestionar el cambio de turno
     public void cambiarTurno(){
         int jugadorHizoFold = 1;
         while (jugadorHizoFold == 1) {
@@ -115,11 +119,12 @@ public class TexasHoldEm extends JuegoDePoker {
         }
         actualizarDineroPlayers();
     }
+    // Se encarga de evaluar y remover aquellos jugadores que ya no tienen dinero
     public void evaluarJugadorSinDinero(){
         jugadores.removeIf(jugador -> jugador.getDinero()<=0);
     }
+    // Se encarga de la lógica tras el final de una ronda para determinar el ganador
     public void finRonda(){
-        int posicionGanador = 0;
         if (verificarNumJugadoresRestantes()==1) {
             for (int i = 0; i < jugadores.size(); i++) {
                 if (!foldJugadores.contains(i)) {
@@ -142,18 +147,19 @@ public class TexasHoldEm extends JuegoDePoker {
             nuevaRonda();
         }
     }
+    // Se encarga de la lógica para concluir el juego, cuando solo queda un jugador con dinero
     public void finDelJuego(){
         JOptionPane.showMessageDialog(null,"Ganador juego: " + jugadores.getFirst().getNombre());
         ventana.dispose();
-
     }
+    // Evalúa cuántos jugadores no han foldeado
     public int verificarNumJugadoresRestantes(){
         if (jugadores.size()-foldJugadores.size() == 1){
             return 1;
         }
         return 0;
     }
-
+    // Pregunta la ciega que se pagará en la partida
     public void preguntarCiega() {
         while (ciegaPequeña < 1 || ciegaPequeña > 10) {
             String ciegaStr = JOptionPane.showInputDialog(null,
@@ -161,6 +167,7 @@ public class TexasHoldEm extends JuegoDePoker {
                     JOptionPane.QUESTION_MESSAGE);
             ciegaPequeña = Integer.parseInt(ciegaStr);
             ciegaGrande = ciegaPequeña*2;
+            apuestaMasGrande = ciegaGrande;
             if(ciegaPequeña < 1 || ciegaPequeña > 10 ){
                 JOptionPane.showMessageDialog(null,
                         "Precio de ciega no válido",
@@ -168,7 +175,7 @@ public class TexasHoldEm extends JuegoDePoker {
             }
         }
     }
-
+    // Se encarga de cobrarle al jugador respectivo la ciega pequeña
     public void pagarCiegaPequeña(){
         Jugador jugador = jugadores.get(jugadorEnTurno-1);
         if (jugador.getDinero() >= ciegaPequeña) {
@@ -183,7 +190,7 @@ public class TexasHoldEm extends JuegoDePoker {
         ventana.mostrarPot(boteInt);
         countCalls++;
     }
-
+    // Se encarga de cobrarle al jugador respectivo la ciega grande
     public void pagarCiegaGrande(){
         Jugador jugador = jugadores.get(jugadorEnTurno-1);
         if (jugador.getDinero() >= ciegaGrande) {
@@ -201,6 +208,7 @@ public class TexasHoldEm extends JuegoDePoker {
             ventana.switchCallPorCheck();
         }
     }
+    // Se encarga de la lógica cuando se busca subir la apuesta
     public void subir(){
         String apuesta = JOptionPane.showInputDialog(null,"Ingresa dinero: ","Apuesta",JOptionPane.PLAIN_MESSAGE);
         int dineroApostado = Integer.parseInt(apuesta);
@@ -218,8 +226,6 @@ public class TexasHoldEm extends JuegoDePoker {
                 ventana.mostrarPot(boteInt);
                 apuestaMasGrande = dineroApostado;
                 countCalls = 1;
-                ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\apuestaImagen.png");
-                Image imagenAEscalar = imagen.getImage();
                 cambiarTurno();
                 verificarSiYaTodosDecidieronAcciones();
             } else {
@@ -229,6 +235,7 @@ public class TexasHoldEm extends JuegoDePoker {
             }
         }
     }
+    // Se encarga de la lógica cuando el jugador decide callear
     public void callear(){
         countCalls++;
         if (jugadores.get(jugadorEnTurno-1).getDinero() != 0) {
@@ -241,13 +248,6 @@ public class TexasHoldEm extends JuegoDePoker {
             jugadores.set(jugadorEnTurno - 1, jugador);
             boteInt += apuestaMasGrande;
             ventana.mostrarPot(boteInt);
-            ImageIcon imagen = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\callImagen.png");
-            Image imagenAEscalar = imagen.getImage();
-            imagen = new ImageIcon(imagenAEscalar.getScaledInstance(50, 50, Image.SCALE_SMOOTH));
-        /*JOptionPane.showMessageDialog(null,
-                "Jugador "+jugadorEnTurno+" ha apostado +"+apuestaMasGrande+"!",
-                "Anuncio de Call",JOptionPane.INFORMATION_MESSAGE,
-                imagen);*/
             cambiarTurno();
             verificarSiYaTodosDecidieronAcciones();
         }else{
@@ -259,15 +259,20 @@ public class TexasHoldEm extends JuegoDePoker {
             apuestaMasGrande = 0;
         }
     }
+    // Se encarga de la lógica cuando el jugador desea foldear
     public void foldear(){
         foldJugadores.add(jugadorEnTurno-1);
         cambiarTurno();
         verificarSiYaTodosDecidieronAcciones();
     }
+    // Se encarga de la lógica cuando el jugador desea hacer check
     public void check(){
         cambiarTurno();
         verificarSiYaTodosDecidieronAcciones();
     }
+    /* Se encarga de determinar si ya todos los jugadores tomaron una accion,
+       es decir, que el juego ya dio un giro de turnos completo
+    */
     public void  verificarSiYaTodosDecidieronAcciones(){
         if (jugadorEnTurno-1 == 0){
             if (countRondas >= 1){
@@ -276,9 +281,8 @@ public class TexasHoldEm extends JuegoDePoker {
         }
         countRondas++;
     }
+    // Se encarga de actualizar el dinero de los jugadores en el JFrame
     public void actualizarDineroPlayers(){
         ventana.mostrarDineroDeTodosLosJugadores(jugadores);
     }
-
-
 }

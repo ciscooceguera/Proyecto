@@ -28,7 +28,7 @@ public class CardDraw5 extends JuegoDePoker {
         pagarCiegaGrande();
         cambiarTurno();
         actualizarDineroPlayers();
-        ventana.mostrarManoFrame(jugadores.get(jugadorEnTurno-1).getMano().getMano(),countDescartes);
+        ventana.mostrarManoFrame(jugadores.get(jugadorEnTurno-1).getMano().getMano(),countDescartes,jugadores.size());
         ventana.descartar.setVisible(false);
 
     }
@@ -77,7 +77,7 @@ public class CardDraw5 extends JuegoDePoker {
 
     public void mostrarManoEnTurno(){
         ventana.reiniciarManoFrame();
-        ventana.mostrarManoFrame(jugadores.get(jugadorEnTurno-1).getMano().getMano(), countDescartes);
+        ventana.mostrarManoFrame(jugadores.get(jugadorEnTurno-1).getMano().getMano(), countDescartes,jugadores.size());
     }
 
     // implementa repartirManos() que es abstracto, llena el arraylist de manos de acuerdo al # de jugadores
@@ -164,6 +164,7 @@ public class CardDraw5 extends JuegoDePoker {
                     JOptionPane.QUESTION_MESSAGE);
             ciegaPequeña = Integer.parseInt(ciegaStr);
             ciegaGrande = ciegaPequeña*2;
+            apuestaMasGrande = ciegaGrande;
             if(ciegaPequeña < 1 || ciegaPequeña > 10 ){
                 JOptionPane.showMessageDialog(null,
                         "Precio de ciega no válido",
