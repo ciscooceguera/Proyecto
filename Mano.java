@@ -312,12 +312,25 @@ public class Mano implements Comparable{
     }
 
     public void removerCarta(Carta carta){
-        for (Carta c : mano){
-            if (c.getValor() == carta.getValor()){
-                if (c.getFigura() == carta.getFigura()){
-                    mano.remove(c);
-                }
+        Iterator<Carta> it = mano.iterator();
+        while (it.hasNext()) {
+            Carta c = it.next();
+            if (carta.equals(c)) {
+                it.remove();
             }
         }
+    }
+    public void tomarCarta(Carta carta){
+        mano.add(carta);
+    }
+    public boolean contieneCarta(Carta carta){
+        Iterator<Carta> it = mano.iterator();
+        while (it.hasNext()) {
+            Carta c = it.next();
+            if (carta.equals(c)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
