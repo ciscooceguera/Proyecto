@@ -6,18 +6,17 @@ import java.util.Collections;
 
 public class CardDraw5 extends JuegoDePoker {
     private int countRondas = 0;
+    private int countDescartes = 0;
     private int countCalls = 0;
-    private ArrayList<Carta> cartasComunitarias;
     private Ventana ventana;
 
     public CardDraw5(int numJugadores) {
         super(numJugadores);
-        cartasComunitarias = new ArrayList<>();
         iniciarJuego();
     }
 
     public void iniciarJuego(){
-        ventana = new Ventana("Texas HoldEm",this);
+        ventana = new Ventana("Card Draw 5",this);
         ventana.setVisible(true);
         mostrarDineroTurnoActual();
         mostrarManoEnTurno();
@@ -29,44 +28,56 @@ public class CardDraw5 extends JuegoDePoker {
         pagarCiegaGrande();
         cambiarTurno();
         actualizarDineroPlayers();
-        ventana.mostrarManos(jugadores);
+        ventana.mostrarManoFrame(jugadores.get(jugadorEnTurno-1).getMano().getMano(),countDescartes);
+        ventana.descartar.setVisible(false);
+
     }
 
-    public void nuevaRonda(){
-        jugadores.getLast().incrementarDinero(boteInt);
-        evaluarJugadorSinDinero();
-        if (jugadores.size() == 1){
-            finDelJuego();
-        }else {
-            countRondas = 0;
-            cartasComunitarias.clear();
-            ventana.reiniciarCartasComunitarias();
-            ventana.setVisible(true);
-            boteInt = 0;
-            mostrarDineroTurnoActual();
-            mostrarManoEnTurno();
-            mostrarDineroEnElBote();
-            mostrarMensajeEnBanner();
-            countCalls = 2;
-            apuestaMasGrande = 0;
-            jugadorEnTurno = 1;
-            mazo.clearMazo();
-            mazo.crearMazo();
-            mazo.revolverMazo();
-            foldJugadores.clear();
-            repartirManos();
-            pagarCiegaPequeña();
-            cambiarTurno();
-            pagarCiegaGrande();
-            cambiarTurno();
-            actualizarDineroPlayers();
-            ventana.mostrarManos(jugadores);
-            System.out.println(cartasComunitarias);
+    public void nuevaRonda() {
+        if (!jugadores.isEmpty()) {
+            jugadores.getLast().incrementarDinero(boteInt);
         }
+
+        evaluarJugadorSinDinero();
+
+        if (jugadores.size() <= 1) {
+            finDelJuego();
+            return;
+        }
+
+        boteInt = 0;
+        countRondas = 0;
+        countDescartes = 0;
+        countCalls = 2;
+        apuestaMasGrande = 0;
+        jugadorEnTurno = 1;
+        foldJugadores.clear();
+
+        mazo.clearMazo();
+        mazo.crearMazo();
+        mazo.revolverMazo();
+        repartirManos();
+
+        pagarCiegaPequeña();
+        cambiarTurno();
+        pagarCiegaGrande();
+        cambiarTurno();
+
+        actualizarDineroPlayers();
+        mostrarDineroTurnoActual();
+        mostrarManoEnTurno();
+        mostrarDineroEnElBote();
+        mostrarMensajeEnBanner();
+        ventana.setVisible(true);
+
+        countRondas=0;
+        verificarSiYaTodosDecidieronAcciones();
+
     }
 
     public void mostrarManoEnTurno(){
-        ventana.mostrarCartasJugadorTurno(jugadores.get(jugadorEnTurno-1).getMano());
+        ventana.reiniciarManoFrame();
+        ventana.mostrarManoFrame(jugadores.get(jugadorEnTurno-1).getMano().getMano(), countDescartes);
     }
 
     // implementa repartirManos() que es abstracto, llena el arraylist de manos de acuerdo al # de jugadores
@@ -103,10 +114,6 @@ public class CardDraw5 extends JuegoDePoker {
         mostrarDineroTurnoActual();
         mostrarDineroEnElBote();
         mostrarMensajeEnBanner();
-        if (verificarNumJugadoresRestantes()==1 || (cartasComunitarias.size()==5 && jugadorEnTurno == 1)
-                && countCalls == jugadores.size() - foldJugadores.size()){
-            finRonda();
-        }
         actualizarDineroPlayers();
     }
 
@@ -126,11 +133,9 @@ public class CardDraw5 extends JuegoDePoker {
         }else{
             for (int i = 0; i < jugadores.size(); i++) {
                 if (!foldJugadores.contains(i)) {
-                    Mano mano = jugadores.get(i).getMano();
-                    mano.concatenarCartas(cartasComunitarias);
-                    Jugador newJugador = jugadores.get(i);
-                    newJugador.setManoComunitaria(mano);
-                    jugadores.set(i, newJugador);
+                    Jugador jugador = jugadores.get(i);
+                    jugador.setManoComunitaria(jugador.getMano());
+                    jugadores.set(i, jugador);
                 }
             }
             Collections.sort(jugadores);
@@ -141,8 +146,8 @@ public class CardDraw5 extends JuegoDePoker {
 
     public void finDelJuego(){
         JOptionPane.showMessageDialog(null,"Ganador juego: " + jugadores.getFirst().getNombre());
-        ventana.endGame();
-
+        //ventana.endGame();
+        ventana.dispose();
     }
 
     public int verificarNumJugadoresRestantes(){
@@ -197,6 +202,9 @@ public class CardDraw5 extends JuegoDePoker {
         countCalls++;
         if (countCalls == jugadores.size()-foldJugadores.size()){
             ventana.switchCallPorCheck();
+            if (ventana.descartar.isVisible()){
+                ventana.check.setVisible(false);
+            }
         }
     }
 
@@ -256,6 +264,9 @@ public class CardDraw5 extends JuegoDePoker {
         }
         if (countCalls == jugadores.size()-foldJugadores.size()){
             ventana.switchCallPorCheck();
+            if (ventana.descartar.isVisible()){
+                ventana.check.setVisible(false);
+            }
             apuestaMasGrande = 0;
         }
     }
@@ -272,13 +283,43 @@ public class CardDraw5 extends JuegoDePoker {
 
     public void  verificarSiYaTodosDecidieronAcciones(){
         if (jugadorEnTurno-1 == 0){
-            if (countRondas >= 1){
-
+            if (countRondas >= 3){
+                finRonda();
+                return;
+            }
+            if (countRondas == 1){
+                ventana.descartar.setVisible(true);
+                ventana.fold.setVisible(false);
+                ventana.raise.setVisible(false);
+                ventana.check.setVisible(false);
+                ventana.call.setVisible(false);
+            }else{
+                ventana.descartar.setVisible(false);
+                ventana.fold.setVisible(true);
+                ventana.raise.setVisible(true);
+                ventana.check.setVisible(true);
             }
             countRondas++;
         }
     }
-
+    public void descartar(ArrayList<Carta> cartas){
+        Mano mano = jugadores.get(jugadorEnTurno-1).getMano();
+        for (int i = 0 ; i < cartas.size(); i++) {
+            if (mano.contieneCarta(cartas.get(i))) {
+                mano.removerCarta((cartas.get(i)));
+            }
+        }
+        while (mano.getMano().size()<5){
+            mano.tomarCarta(mazo.tomarCarta());
+        }
+        Jugador jugador = jugadores.get(jugadorEnTurno-1);
+        jugador.setMano(mano);
+        mostrarManoEnTurno();
+        System.out.println(jugadores.get(jugadorEnTurno-1).getMano());
+        countDescartes++;
+        cambiarTurno();
+        verificarSiYaTodosDecidieronAcciones();
+    }
     public void actualizarDineroPlayers(){
         ventana.mostrarDineroDeTodosLosJugadores(jugadores);
     }
