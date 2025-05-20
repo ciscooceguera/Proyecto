@@ -24,21 +24,30 @@ public class Mano implements Comparable{
 
     }
     public boolean esEscalera(){
-        int contadorCartasConsecutivas = 1;
-        int valorActual = 0;
+        acomodarMano();
+        List<Integer> valores = new ArrayList<>();
+
         for (Carta carta : mano) {
-            if (valorActual != 0){
-                if (valorActual+1 == carta.getValor()){
-                    valorActual = carta.getValor();
-                    contadorCartasConsecutivas++;
-                }else if (carta.getValor() == 14 && getValorMayor() == 5){
-                    contadorCartasConsecutivas++;
-                }
-            }else{
-                valorActual = carta.getValor();
+            int valor = carta.getValor();
+            if (!valores.contains(valor)) {
+                valores.add(valor);
             }
         }
-        return contadorCartasConsecutivas == mano.size();
+        if (valores.contains(14)) {
+            valores.add(1);
+            Collections.sort(valores);
+        }
+
+        int consecutivos = 1;
+        for (int i = 0; i < valores.size() - 1; i++) {
+            if (valores.get(i + 1) == valores.get(i) + 1) {
+                consecutivos++;
+                if (consecutivos == 5) return true;
+            } else {
+                consecutivos = 1;
+            }
+        }
+        return false;
     }
     // retorna true si hay un par
     public boolean hayPar(){
@@ -147,11 +156,11 @@ public class Mano implements Comparable{
     }
     // Retorna booleano, evalúa si la mano contiene una escalera de color
     public boolean esEscaleraDeColor(){
-        return esMismaFigura()&&esEscalera();
+        return esMismaFigura() && esEscalera();
     }
     // Retorna booleano, evalúa si la mano contiene una escalera straight
     public boolean esEscaleraStraight(){
-        return !esEscaleraReal() && !esEscaleraDeColor() && !esEscalera();
+        return !esEscaleraReal() && !esEscaleraDeColor() && esEscalera();
     }
     // Retorna una cadena que representa la impresión de la mano en consola
     public String toString(){
@@ -196,7 +205,7 @@ public class Mano implements Comparable{
         for (Carta carta : mano){
             int numRepetidas = cuantasRepetidas(carta);
             if (numRepetidas == 2){
-                return mano.get(mano.size()-1).getValor();
+                return carta.getValor();
             }
         }
         return 0;
@@ -241,6 +250,7 @@ public class Mano implements Comparable{
     @Override
     public int compareTo(Object o) {
         Mano m = (Mano) o;
+
         if (getPuntaje() == m.getPuntaje()){
             if (hayDosPares() && m.hayDosPares()){
                 if (getValorParMasAlto() == m.getValorParMasAlto()) {
@@ -254,10 +264,60 @@ public class Mano implements Comparable{
                 if (getValorPar() == m.getValorPar()) {
                     return getCartaMasAlta() - m.getCartaMasAlta();
                 }
+            }else{
+                acomodarMano();
+                m.acomodarMano();
+                if (mano.get(mano.size()-2).getValor() - m.mano.get(mano.size()-2).getValor() == 0){
+                    if (mano.get(mano.size()-3).getValor() - m.mano.get(mano.size()-3).getValor() == 0){
+                        if (mano.get(mano.size()-4).getValor() - m.mano.get(mano.size()-4).getValor() == 0){
+                            return mano.get(mano.size()-5).getValor() - m.mano.get(mano.size()-5).getValor();
+                        }else{
+                            return mano.get(mano.size()-4).getValor() - m.mano.get(mano.size()-4).getValor();
+                        }
+                    }else{
+                        return mano.get(mano.size()-3).getValor() - m.mano.get(mano.size()-3).getValor();
+                    }
+                }else{
+                    return mano.get(mano.size()-2).getValor() - m.mano.get(mano.size()-2).getValor();
+                }
             }
+
         }
+
         return getPuntaje() - m.getPuntaje();
     }
 
+    public void concatenarCartas(ArrayList<Carta> cartasComunitarias){
+        mano.addAll(cartasComunitarias);
+        acomodarMano();
+    }
 
+    @Override
+    public boolean equals(Object obj) {
+        int coincidencias = 0;
+        acomodarMano();
+        Mano m = (Mano) obj;
+        m.acomodarMano();
+        for (int i = 0; i < mano.size(); i++) {
+            if (mano.get(i).getValor() == m.getMano().get(i).getValor()){
+                if (mano.get(i).getFigura() == m.getMano().get(i).getFigura()){
+                    coincidencias++;
+                }
+            }
+        }
+        if (coincidencias == mano.size()){
+            return true;
+        }
+        return false;
+    }
+
+    public void removerCarta(Carta carta){
+        for (Carta c : mano){
+            if (c.getValor() == carta.getValor()){
+                if (c.getFigura() == carta.getFigura()){
+                    mano.remove(c);
+                }
+            }
+        }
+    }
 }
