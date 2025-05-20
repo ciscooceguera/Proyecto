@@ -47,7 +47,7 @@ public class Carta implements Comparable {
     }
     // Metodo que retorna la ruta que representa a la carta
     public String obtenerImgRuta(){
-        String path = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\Cartas\\";
+        String path = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\Cartas\\";
         switch(valor){
             case 11:
                 path += "J"+figura+".png";

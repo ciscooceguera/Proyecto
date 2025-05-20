@@ -21,6 +21,7 @@ public class Main extends JFrame{
         ventana.setLocationRelativeTo(null);
         ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ventana.setLayout(null);
+        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoMain.png");
         ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoMain.png");
         //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoMain.png");
         Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
@@ -34,9 +35,7 @@ public class Main extends JFrame{
         panel.setBounds(0, 0, 1920, 1080);
         panel.setOpaque(false);
 
-        //String rutaBotones="C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesMain\\";
-        String rutaBotones="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\BotonesMain\\";
-
+        String rutaBotones="C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesMain\\";
 
         String rutaJugar=rutaBotones+"botonJugar.png";
         String rutaJugarPress=rutaBotones+"botonJugarPress.png";
@@ -72,6 +71,7 @@ public class Main extends JFrame{
                 jugar.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                 jugar.setLayout(null);
 
+                ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoTipo.png");
                 //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoTipo.png");
                 ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoTipo.png");
                 Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
@@ -85,6 +85,7 @@ public class Main extends JFrame{
                 panel.setBounds(0, 0, 1920, 1080);
                 panel.setOpaque(false);
 
+                String rutaBotones = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTipo\\";
                 String rutaBotones="C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\BotonesTipo\\";
                 //String rutaBotones="C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\BotonesTipo\\";
 
@@ -115,6 +116,7 @@ public class Main extends JFrame{
                         texas.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         texas.setLayout(null);
 
+                        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadoresTexas.png");
                         //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadoresTexas.png");
                         ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoJugadoresTexas.png");
                         Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
@@ -160,6 +162,8 @@ public class Main extends JFrame{
                                 informacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 informacion.setLayout(null);
 
+                                ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformaciónTexas.png");
+
                                 //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformaciónTexas.png");
                                 ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoInformaciónTexas.png");
                                 Image imagenAEscalar = pic.getImage().getScaledInstance(1920, 1080, Image.SCALE_SMOOTH);
@@ -203,6 +207,8 @@ public class Main extends JFrame{
                         card5.setLocationRelativeTo(null);
                         card5.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                         card5.setLayout(null);
+
+                        ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadores5Card.png");
 
                         //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoJugadores5Card.png");
                         ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoJugadores5Card.png");
@@ -250,6 +256,8 @@ public class Main extends JFrame{
                                 informacion.setLocationRelativeTo(null);
                                 informacion.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                                 informacion.setLayout(null);
+
+                                ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformación5Card.png");
 
                                 //ImageIcon pic = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImagenesMain\\fondoInformación5Card.png");
                                 ImageIcon pic = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImagenesMain\\fondoInformación5Card.png");

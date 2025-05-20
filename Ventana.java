@@ -47,7 +47,7 @@ public class Ventana extends JFrame {
 
     // inicializa los botones
     public void inicializarComponentes(){
-        String rutaDefault = "C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\BotonesImage\\";
+        String rutaDefault = "C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImageCasino\\BotonesImage\\";
         String rutaFold = rutaDefault + "buttonFold.png";
         String rutaFoldOnPress = rutaDefault + "buttonFoldOnPress.png";
         String rutaRaise = rutaDefault + "buttonRaise.png";
@@ -67,14 +67,14 @@ public class Ventana extends JFrame {
         textDineroJugador = new JTextArea();
         dineroJugadores = new JTextArea();
 
-        bannerMsg = crearBotonRectangularBordeado("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\bannerMsg.png",
+        bannerMsg = crearBotonRectangularBordeado("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImageCasino\\bannerMsg.png",
                 480,240,0);
 
-        bannerRojo = crearBotonRectangularBordeado("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\bannerRojo.png",
+        bannerRojo = crearBotonRectangularBordeado("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImageCasino\\bannerRojo.png",
                 480,480,0);
         bannerRojo.setVisible(false);
 
-        pilaDeFichas = crearBotonRectangularBordeado("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\pilaDeFichas.png");
+        pilaDeFichas = crearBotonRectangularBordeado("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImageCasino\\pilaDeFichas.png");
         pilaDeFichas.setBounds(700,320,120,120);
         this.add(pilaDeFichas);
     }
@@ -185,7 +185,7 @@ public class Ventana extends JFrame {
             @Override
             protected void paintComponent(Graphics g){
                 super.paintComponent(g);
-                Image fondo = new ImageIcon("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\ImageCasino\\mesaPokerRoja.png").getImage();
+                Image fondo = new ImageIcon("C:\\Users\\joser\\IdeaProjects\\Proyecto\\ImageCasino\\mesaPokerRoja.png").getImage();
                 g.drawImage(fondo, 0, 0, 1920, 1080, this);
             }
         };
@@ -493,7 +493,7 @@ public class Ventana extends JFrame {
         textDineroJugador.setText("$");
         try {
             Font cinzelDec = Font.createFont(Font.TRUETYPE_FONT
-                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
+                            , new File("C:\\Users\\joser\\IdeaProjects\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
                     .deriveFont(Font.BOLD, 100f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(cinzelDec);
@@ -512,7 +512,7 @@ public class Ventana extends JFrame {
         textPot.setText("$"+0);
         try {
             Font cinzelDec = Font.createFont(Font.TRUETYPE_FONT
-                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
+                            , new File("C:\\Users\\joser\\IdeaProjects\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
                     .deriveFont(Font.BOLD, 80f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(cinzelDec);
@@ -530,7 +530,7 @@ public class Ventana extends JFrame {
         mensajeTurno.setText("" + " Is Thinking...");
         try {
             Font cinzelDec = Font.createFont(Font.TRUETYPE_FONT
-                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
+                            , new File("C:\\Users\\joser\\IdeaProjects\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
                     .deriveFont(Font.BOLD, 30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(cinzelDec);
@@ -549,7 +549,7 @@ public class Ventana extends JFrame {
         textManos.setText("");
         try {
             Font cinzelDec = Font.createFont(Font.TRUETYPE_FONT
-                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
+                            , new File("C:\\Users\\joser\\IdeaProjects\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
                     .deriveFont(Font.BOLD, 30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(cinzelDec);
@@ -568,7 +568,7 @@ public class Ventana extends JFrame {
         dineroJugadores.setText("Dinero Jugadores: \n");
         try {
             Font cinzelDec = Font.createFont(Font.TRUETYPE_FONT
-                            , new File("C:\\Users\\RedBo\\OneDrive\\Escritorio\\POO\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
+                            , new File("C:\\Users\\joser\\IdeaProjects\\Proyecto\\FuentesNuevas\\CinzelDecorative-Bold.ttf"))
                     .deriveFont(Font.BOLD, 30f);
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
             ge.registerFont(cinzelDec);
